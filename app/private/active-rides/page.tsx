@@ -2,29 +2,48 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { fetchActiveRides, stopActiveRide } from "../lib/api";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { fetchActiveRides, stopActiveRide } from "../lib/api";
+import CountrySelector from "../../components/CountrySelector";
 
 export default function ActiveRidesPage() {
     const [rides, setRides] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedCountry, setSelectedCountry] = useState("");
 
     useEffect(() => {
         loadData();
-        const interval = setInterval(loadData, 10000); // Poll every 10s
+        const interval = setInterval(loadData, 10000); // Polling every 10s
         return () => clearInterval(interval);
-    }, []);
+    }, [selectedCountry]);
 
     const loadData = async () => {
-        const data = await fetchActiveRides();
-        setRides(Array.isArray(data) ? data : []);
+        setLoading(true);
+        try {
+            const data = await fetchActiveRides(selectedCountry);
+            setRides(Array.isArray(data) ? data : []);
+        } catch (error) {
+            console.error(error);
+            setRides([]);
+        }
         setLoading(false);
     };
 
-    const handleStopRide = async (id: string) => {
-        if (confirm("Are you sure you want to stop this ride forcefully?")) {
-            await stopActiveRide(id);
+    const handleStopRide = async (rideId: string) => {
+        if (!confirm("Are you sure you want to emergency stop this ride?")) return;
+        const success = await stopActiveRide(rideId);
+        if (success) {
             loadData();
+        } else {
+            alert("Failed to stop ride");
         }
     };
 
@@ -32,42 +51,78 @@ export default function ActiveRidesPage() {
         <div className="p-8 space-y-8">
             <header className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900">Active Rides Monitor</h1>
-                    <p className="text-slate-500">Real-time view of ongoing rides.</p>
+                    <h1 className="text-3xl font-bold text-slate-900">Active Rides</h1>
+                    <p className="text-slate-500">Monitor rides currently in progress.</p>
                 </div>
-                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    Live Updating
+                <div className="flex gap-4">
+                    <CountrySelector selectedCountry={selectedCountry} onChange={setSelectedCountry} />
                 </div>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {!loading && rides.length === 0 && (
-                    <div className="col-span-full text-center py-20 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-                        <p className="text-slate-500">No active rides at the moment.</p>
-                    </div>
-                )}
-
-                {rides.map(ride => (
-                    <div key={ride._id} className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                        <div>
-                            <div className="flex justify-between items-start mb-4">
-                                <Badge variant="outline" className="font-mono text-xs">{ride.code}</Badge>
-                                <span className="text-xs text-slate-400">Started {new Date(ride.createdAt || Date.now()).toLocaleTimeString()}</span>
-                            </div>
-                            <h3 className="font-bold text-lg mb-1">Ride Session</h3>
-                            <div className="text-sm text-slate-600 mb-4">
-                                <p>Host ID: <span className="font-mono bg-slate-100 px-1 rounded">{ride.hostId}</span></p>
-                                <p>{ride.participantIds?.length || 1} Participants</p>
-                            </div>
-                        </div>
-                        <div className="pt-4 border-t border-slate-100 mt-4">
-                            <Button variant="destructive" size="sm" className="w-full" onClick={() => handleStopRide(ride._id)}>
-                                Force Stop
-                            </Button>
-                        </div>
-                    </div>
-                ))}
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <Table>
+                    <TableHeader>
+                        <TableRow className="bg-slate-50 hover:bg-slate-50">
+                            <TableHead>Host</TableHead>
+                            <TableHead>Started At</TableHead>
+                            <TableHead>Participants</TableHead>
+                            <TableHead>Current Location</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead className="text-right">Actions</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {loading && rides.length === 0 ? (
+                            Array.from({ length: 3 }).map((_, i) => (
+                                <TableRow key={i}>
+                                    <TableCell><div className="h-4 w-32 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-24 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-16 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-40 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-20 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell className="text-right"><div className="h-8 w-16 bg-slate-100 rounded animate-pulse ml-auto"></div></TableCell>
+                                </TableRow>
+                            ))
+                        ) : rides.map((ride) => (
+                            <TableRow key={ride._id || ride.id} className="hover:bg-slate-50/50 transition-colors">
+                                <TableCell className="font-bold text-slate-900">
+                                    {/* hostId is populated with User object now */}
+                                    {ride.hostId?.displayName || 'Unknown'}
+                                </TableCell>
+                                <TableCell className="text-slate-600">
+                                    {new Date(ride.createdAt).toLocaleTimeString()}
+                                </TableCell>
+                                <TableCell>
+                                    <span className="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs font-medium">
+                                        {ride.participantIds?.length || 1} Riders
+                                    </span>
+                                </TableCell>
+                                <TableCell className="font-mono text-xs text-slate-500">
+                                    {ride.locations?.[0] ? `${ride.locations[0].latitude.toFixed(4)}, ${ride.locations[0].longitude.toFixed(4)}` : 'Waiting for signal...'}
+                                </TableCell>
+                                <TableCell>
+                                    <Badge className="bg-green-500 hover:bg-green-600 animate-pulse">LIVE</Badge>
+                                </TableCell>
+                                <TableCell className="text-right">
+                                    <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        onClick={() => handleStopRide(ride._id || ride.id)}
+                                    >
+                                        Emergency Stop
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                        {!loading && rides.length === 0 && (
+                            <TableRow>
+                                <TableCell colSpan={6} className="text-center py-16 text-slate-400">
+                                    No active rides at the moment.
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
     Table,
     TableBody,
@@ -10,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import CountrySelector from "../../components/CountrySelector";
 import { fetchPosts } from "../lib/api";
 
 export default function PostsPage() {
@@ -19,18 +21,19 @@ export default function PostsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalPosts, setTotalPosts] = useState(0);
+    const [selectedCountry, setSelectedCountry] = useState("");
 
     useEffect(() => {
         const timer = setTimeout(() => {
             loadData();
         }, 500);
         return () => clearTimeout(timer);
-    }, [page, search]);
+    }, [page, search, selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
         try {
-            const res = await fetchPosts(page, 10, search);
+            const res = await fetchPosts(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
@@ -52,6 +55,7 @@ export default function PostsPage() {
                     <p className="text-slate-500">Manage and moderate community posts.</p>
                 </div>
                 <div className="flex gap-4">
+                    <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
                     <div className="relative">
                         <input
                             type="text"

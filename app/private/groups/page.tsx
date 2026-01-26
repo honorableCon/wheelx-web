@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { fetchGroups } from "../lib/api";
+import CountrySelector from "../../components/CountrySelector";
 
 export default function GroupsPage() {
     const [groups, setGroups] = useState<any[]>([]);
@@ -20,18 +21,19 @@ export default function GroupsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalGroups, setTotalGroups] = useState(0);
+    const [selectedCountry, setSelectedCountry] = useState("");
 
     useEffect(() => {
         const timer = setTimeout(() => {
             loadData();
         }, 500);
         return () => clearTimeout(timer);
-    }, [page, search]);
+    }, [page, search, selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
         try {
-            const res = await fetchGroups(page, 10, search);
+            const res = await fetchGroups(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
@@ -53,6 +55,7 @@ export default function GroupsPage() {
                     <p className="text-slate-500">Manage community groups and memberships.</p>
                 </div>
                 <div className="flex gap-4">
+                    <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
                     <div className="relative">
                         <input
                             type="text"

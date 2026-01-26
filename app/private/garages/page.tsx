@@ -11,7 +11,8 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { fetchGarages, deleteGarage, updateGarage } from "../lib/api";
+import { fetchGarages, deleteGarage, updateGarage, createGarage } from "../lib/api";
+import CountrySelector from "../../components/CountrySelector";
 
 export default function GaragesPage() {
     const [garages, setGarages] = useState<any[]>([]);
@@ -22,16 +23,39 @@ export default function GaragesPage() {
 
     // Edit State
     const [editingGarage, setEditingGarage] = useState<any>(null);
-    const [editForm, setEditForm] = useState({ name: "", address: "", services: "" });
+    const [isCreating, setIsCreating] = useState(false);
+    const [editForm, setEditForm] = useState({
+        name: "",
+        address: "",
+        city: "",
+        country: "",
+        description: "",
+        phone: "",
+        email: "",
+        website: "",
+        image: "",
+        services: "",
+        brands: "",
+        openingHours: "",
+        latitude: "",
+        longitude: "",
+        isPartner: false,
+        verified: false,
+    });
+    const [selectedCountry, setSelectedCountry] = useState("");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
-        loadData();
-    }, [page]);
+        const timer = setTimeout(() => {
+            loadData();
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [page, search, selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
         try {
-            const res = await fetchGarages(page, 10);
+            const res = await fetchGarages(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
@@ -58,28 +82,75 @@ export default function GaragesPage() {
 
     const startEdit = (garage: any) => {
         setEditingGarage(garage);
+        setIsCreating(false);
         setEditForm({
-            name: garage.name,
-            address: garage.address,
-            services: garage.services?.join(", ") || ""
+            name: garage.name || "",
+            address: garage.address || "",
+            city: garage.city || "",
+            country: garage.country || "",
+            description: garage.description || "",
+            phone: garage.phone || "",
+            email: garage.email || "",
+            website: garage.website || "",
+            image: garage.image || "",
+            services: garage.services?.join(", ") || "",
+            brands: garage.brands?.join(", ") || "",
+            openingHours: garage.openingHours || "",
+            latitude: garage.coordinates?.latitude || "",
+            longitude: garage.coordinates?.longitude || "",
+            isPartner: garage.isPartner || false,
+            verified: garage.verified || false,
+        });
+    };
+
+    const startCreate = () => {
+        setEditingGarage({});
+        setIsCreating(true);
+        setEditForm({
+            name: "", address: "", city: "", country: "", description: "",
+            phone: "", email: "", website: "", image: "",
+            services: "", brands: "", openingHours: "",
+            latitude: "", longitude: "",
+            isPartner: false, verified: false
         });
     };
 
     const saveEdit = async () => {
-        if (!editingGarage) return;
-
         const servicesArray = editForm.services.split(",").map(s => s.trim()).filter(Boolean);
-        const data = {
+        const brandsArray = editForm.brands.split(",").map(s => s.trim()).filter(Boolean);
+
+        const data: any = {
             ...editForm,
-            services: servicesArray
+            services: servicesArray,
+            brands: brandsArray,
+            coordinates: {
+                latitude: parseFloat(editForm.latitude) || 0,
+                longitude: parseFloat(editForm.longitude) || 0
+            }
         };
 
-        const success = await updateGarage(editingGarage._id || editingGarage.id, data);
-        if (success) {
-            setEditingGarage(null);
-            loadData();
+        // Remove flat lat/lon to match schema structure
+        delete data.latitude;
+        delete data.longitude;
+
+        if (isCreating) {
+            const success = await createGarage(data);
+            if (success) {
+                setEditingGarage(null);
+                setIsCreating(false);
+                loadData();
+            } else {
+                alert("Failed to create garage.");
+            }
         } else {
-            alert("Failed to update garage.");
+            if (!editingGarage) return;
+            const success = await updateGarage(editingGarage._id || editingGarage.id, data);
+            if (success) {
+                setEditingGarage(null);
+                loadData();
+            } else {
+                alert("Failed to update garage.");
+            }
         }
     };
 
@@ -91,7 +162,21 @@ export default function GaragesPage() {
                     <p className="text-slate-500">Manage partner garages and service centers.</p>
                 </div>
                 <div className="flex gap-4">
-                    <Button>Add New Garage</Button>
+                    <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Search garages..."
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setPage(1);
+                            }}
+                            className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400/50 w-64"
+                        />
+                        <svg className="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <Button onClick={startCreate}>Add New Garage</Button>
                 </div>
             </header>
 
@@ -211,22 +296,34 @@ export default function GaragesPage() {
                 </div>
             </div>
 
-            {/* Simple Edit Modal Overlay */}
-            {editingGarage && (
+            {/* Simple Edit/Create Modal Overlay */}
+            {(editingGarage || isCreating) && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 space-y-4">
-                        <h2 className="text-xl font-bold">Edit Garage</h2>
-                        <div className="space-y-3">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
+                    <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl p-6 space-y-4">
+                        <h2 className="text-xl font-bold">{isCreating ? "Add New Garage" : "Edit Garage"}</h2>
+                        <div className="grid grid-cols-2 gap-4 max-h-[70vh] overflow-y-auto">
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Garage Name *</label>
                                 <input
                                     value={editForm.name}
                                     onChange={e => setEditForm({ ...editForm, name: e.target.value })}
                                     className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="e.g. Auto Fix Dakar"
                                 />
                             </div>
+
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                                <textarea
+                                    value={editForm.description}
+                                    onChange={e => setEditForm({ ...editForm, description: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg h-20"
+                                    placeholder="Brief description of the garage..."
+                                />
+                            </div>
+
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Address</label>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Address *</label>
                                 <input
                                     value={editForm.address}
                                     onChange={e => setEditForm({ ...editForm, address: e.target.value })}
@@ -234,17 +331,139 @@ export default function GaragesPage() {
                                 />
                             </div>
                             <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">City</label>
+                                <input
+                                    value={editForm.city}
+                                    onChange={e => setEditForm({ ...editForm, city: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Country Code (e.g. SN) *</label>
+                                <input
+                                    value={editForm.country}
+                                    onChange={e => setEditForm({ ...editForm, country: e.target.value.toUpperCase() })}
+                                    maxLength={2}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                                <input
+                                    value={editForm.phone}
+                                    onChange={e => setEditForm({ ...editForm, phone: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                />
+                            </div>
+
+                            <div className="col-span-2 grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Latitude *</label>
+                                    <input
+                                        type="number"
+                                        step="any"
+                                        value={editForm.latitude}
+                                        onChange={e => setEditForm({ ...editForm, latitude: e.target.value })}
+                                        className="w-full px-3 py-2 border rounded-lg"
+                                        placeholder="14.7167"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Longitude *</label>
+                                    <input
+                                        type="number"
+                                        step="any"
+                                        value={editForm.longitude}
+                                        onChange={e => setEditForm({ ...editForm, longitude: e.target.value })}
+                                        className="w-full px-3 py-2 border rounded-lg"
+                                        placeholder="-17.4677"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                                <input
+                                    value={editForm.email}
+                                    onChange={e => setEditForm({ ...editForm, email: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Website</label>
+                                <input
+                                    value={editForm.website}
+                                    onChange={e => setEditForm({ ...editForm, website: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="https://..."
+                                />
+                            </div>
+
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Image URL</label>
+                                <input
+                                    value={editForm.image}
+                                    onChange={e => setEditForm({ ...editForm, image: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="https://..."
+                                />
+                            </div>
+
+                            <div className="col-span-2">
                                 <label className="block text-sm font-medium text-slate-700 mb-1">Services (comma separated)</label>
-                                <textarea
+                                <input
                                     value={editForm.services}
                                     onChange={e => setEditForm({ ...editForm, services: e.target.value })}
-                                    className="w-full px-3 py-2 border rounded-lg h-24"
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="Repairs, Tires, Oil Change"
                                 />
+                            </div>
+
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Brands (comma separated)</label>
+                                <input
+                                    value={editForm.brands}
+                                    onChange={e => setEditForm({ ...editForm, brands: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="Yamaha, Honda, BMW"
+                                />
+                            </div>
+
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-slate-700 mb-1">Opening Hours</label>
+                                <input
+                                    value={editForm.openingHours}
+                                    onChange={e => setEditForm({ ...editForm, openingHours: e.target.value })}
+                                    className="w-full px-3 py-2 border rounded-lg"
+                                    placeholder="Mon-Fri: 9am - 6pm"
+                                />
+                            </div>
+
+                            <div className="col-span-2 flex gap-6 pt-2">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={editForm.isPartner}
+                                        onChange={e => setEditForm({ ...editForm, isPartner: e.target.checked })}
+                                        className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Is Partner</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={editForm.verified}
+                                        onChange={e => setEditForm({ ...editForm, verified: e.target.checked })}
+                                        className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Verified</span>
+                                </label>
                             </div>
                         </div>
                         <div className="flex justify-end gap-3 pt-4">
-                            <Button variant="outline" onClick={() => setEditingGarage(null)}>Cancel</Button>
-                            <Button onClick={saveEdit}>Save Changes</Button>
+                            <Button variant="outline" onClick={() => { setEditingGarage(null); setIsCreating(false); }}>Cancel</Button>
+                            <Button onClick={saveEdit}>{isCreating ? "Create Garage" : "Save Changes"}</Button>
                         </div>
                     </div>
                 </div>

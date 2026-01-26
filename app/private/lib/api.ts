@@ -33,9 +33,9 @@ async function handleResponse(res: Response) {
     return json.data && json.data.data ? json.data : json.data ? json.data : json;
 }
 
-export async function fetchRides(page = 1, limit = 10, search = "") {
+export async function fetchRides(page = 1, limit = 10, search = "", country = "") {
     try {
-        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
         const res = await fetch(`${API_URL}/rides/all?${query}`, {
             headers: { ...getAuthHeaders() }
         });
@@ -46,9 +46,10 @@ export async function fetchRides(page = 1, limit = 10, search = "") {
     }
 }
 
-export async function fetchGarages(page = 1, limit = 10) {
+export async function fetchGarages(page = 1, limit = 10, search = "", country = "") {
     try {
-        const res = await fetch(`${API_URL}/garages?page=${page}&limit=${limit}`, {
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
+        const res = await fetch(`${API_URL}/garages?${query}`, {
             headers: { ...getAuthHeaders() }
         });
         return await handleResponse(res);
@@ -59,9 +60,9 @@ export async function fetchGarages(page = 1, limit = 10) {
     }
 }
 
-export async function fetchUsers(page = 1, limit = 10, search = "") {
+export async function fetchUsers(page = 1, limit = 10, search = "", country = "") {
     try {
-        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
         const res = await fetch(`${API_URL}/users?${query}`, {
             headers: { ...getAuthHeaders() }
         });
@@ -72,9 +73,9 @@ export async function fetchUsers(page = 1, limit = 10, search = "") {
     }
 }
 
-export async function fetchGroups(page = 1, limit = 10, search = "") {
+export async function fetchGroups(page = 1, limit = 10, search = "", country = "") {
     try {
-        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
         const res = await fetch(`${API_URL}/groups?${query}`, {
             headers: { ...getAuthHeaders() }
         });
@@ -85,9 +86,9 @@ export async function fetchGroups(page = 1, limit = 10, search = "") {
     }
 }
 
-export async function fetchPosts(page = 1, limit = 10, search = "") {
+export async function fetchPosts(page = 1, limit = 10, search = "", country = "") {
     try {
-        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
         const res = await fetch(`${API_URL}/posts?${query}`, {
             headers: { ...getAuthHeaders() }
         });
@@ -98,9 +99,9 @@ export async function fetchPosts(page = 1, limit = 10, search = "") {
     }
 }
 
-export async function fetchEvents(page = 1, limit = 10, search = "") {
+export async function fetchEvents(page = 1, limit = 10, search = "", country = "") {
     try {
-        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}`;
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
         const res = await fetch(`${API_URL}/events?${query}`, {
             headers: { ...getAuthHeaders() }
         });
@@ -111,9 +112,10 @@ export async function fetchEvents(page = 1, limit = 10, search = "") {
     }
 }
 
-export async function fetchReports(page = 1, limit = 10) {
+export async function fetchReports(page = 1, limit = 10, country = "") {
     try {
-        const res = await fetch(`${API_URL}/reports?page=${page}&limit=${limit}`, {
+        const query = `page=${page}&limit=${limit}${country ? `&country=${country}` : ''}`;
+        const res = await fetch(`${API_URL}/reports?${query}`, {
             headers: { ...getAuthHeaders() }
         });
         return await handleResponse(res);
@@ -123,9 +125,10 @@ export async function fetchReports(page = 1, limit = 10) {
     }
 }
 
-export async function fetchDashboardStats() {
+export async function fetchDashboardStats(country = "") {
     try {
-        const res = await fetch(`${API_URL}/admin/stats`, {
+        const query = country ? `?country=${country}` : '';
+        const res = await fetch(`${API_URL}/admin/stats${query}`, {
             headers: { ...getAuthHeaders() }
         });
         return await handleResponse(res);
@@ -135,9 +138,10 @@ export async function fetchDashboardStats() {
     }
 }
 
-export async function fetchActiveRides() {
+export async function fetchActiveRides(country = "") {
     try {
-        const res = await fetch(`${API_URL}/active-rides/all/active`, {
+        const query = country ? `?country=${country}` : '';
+        const res = await fetch(`${API_URL}/active-rides/all/active${query}`, {
             headers: { ...getAuthHeaders() }
         });
         return await handleResponse(res);
@@ -233,3 +237,34 @@ export async function updateGarage(id: string, data: any) {
         return false;
     }
 }
+
+export async function createGarage(data: any) {
+    try {
+        const res = await fetch(`${API_URL}/garages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeaders()
+            },
+            body: JSON.stringify(data)
+        });
+        return res.ok;
+    } catch (e) {
+        console.error("Failed to create garage", e);
+        return false;
+    }
+}
+
+export async function fetchCountries() {
+    try {
+        const res = await fetch(`${API_URL}/countries`, {
+            headers: { ...getAuthHeaders() }
+        });
+        return await handleResponse(res);
+    } catch (e) {
+        console.error("Failed to fetch countries", e);
+        return [];
+    }
+}
+
+

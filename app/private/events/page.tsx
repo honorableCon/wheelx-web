@@ -11,6 +11,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { fetchEvents } from "../lib/api";
+import CountrySelector from "../../components/CountrySelector";
 
 export default function EventsPage() {
     const [events, setEvents] = useState<any[]>([]);
@@ -19,18 +20,19 @@ export default function EventsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalEvents, setTotalEvents] = useState(0);
+    const [selectedCountry, setSelectedCountry] = useState("");
 
     useEffect(() => {
         const timer = setTimeout(() => {
             loadData();
         }, 500);
         return () => clearTimeout(timer);
-    }, [page, search]);
+    }, [page, search, selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
         try {
-            const res = await fetchEvents(page, 10, search);
+            const res = await fetchEvents(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
@@ -52,6 +54,7 @@ export default function EventsPage() {
                     <p className="text-slate-500">Manage upcoming community events.</p>
                 </div>
                 <div className="flex gap-4">
+                    <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
                     <div className="relative">
                         <input
                             type="text"

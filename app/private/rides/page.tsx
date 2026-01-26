@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchRides } from "../lib/api";
+import CountrySelector from "../../components/CountrySelector";
 
 export default function RidesPage() {
     const [rides, setRides] = useState<any[]>([]);
@@ -21,18 +22,19 @@ export default function RidesPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalRides, setTotalRides] = useState(0);
+    const [selectedCountry, setSelectedCountry] = useState("");
 
     useEffect(() => {
         const timer = setTimeout(() => {
             loadData();
         }, 500);
         return () => clearTimeout(timer);
-    }, [page, search]);
+    }, [page, search, selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
         try {
-            const res = await fetchRides(page, 10, search);
+            const res = await fetchRides(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
@@ -54,6 +56,7 @@ export default function RidesPage() {
                     <p className="text-muted-foreground">Manage and view past ride sessions.</p>
                 </div>
                 <div className="flex gap-4">
+                    <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
                     <div className="relative">
                         <input
                             type="text"
