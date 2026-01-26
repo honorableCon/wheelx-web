@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 const AppleIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -19,6 +20,8 @@ const ChevronDownIcon = () => (
 );
 
 export default function Hero() {
+    const t = useTranslations("Hero");
+
     return (
         <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(251,191,36,0.15)_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(239,68,68,0.1)_0%,transparent_40%),#0a0a0a]">
             {/* Background Elements */}
@@ -33,28 +36,28 @@ export default function Hero() {
                     <div className="text-center lg:text-left animate-fade-in flex flex-col items-center lg:items-start">
                         <div className="inline-flex items-center gap-2 bg-wheelx-dark border border-gray-700 rounded-full px-4 py-2 mb-6">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            <span className="text-sm text-gray-300">Bientôt disponible sur iOS & Android</span>
+                            <span className="text-sm text-gray-300">{t("availability")}</span>
                         </div>
 
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-6">
-                            Elevate Your
+                            {t("title")}
                             <span className="block bg-gradient-to-r from-wheelx-yellow to-wheelx-red bg-clip-text text-transparent">
-                                Ride
+                                {t("ride")}
                             </span>
                         </h1>
 
                         <p className="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-                            L&apos;application ultime pour les motards. Navigation GPS optimisée, suivi de groupe en temps réel, organisation d&apos;événements et une communauté mondiale de riders.
+                            {t("description")}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
                             <a href="#download" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-semibold py-4 px-8 rounded-full shadow-lg shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                                 <AppleIcon />
-                                App Store
+                                {t("appStore")}
                             </a>
                             <a href="#download" className="bg-transparent text-white border-2 border-wheelx-metal font-semibold py-4 px-8 rounded-full hover:border-wheelx-yellow hover:text-wheelx-yellow hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                                 <PlayStoreIcon />
-                                Google Play
+                                {t("googlePlay")}
                             </a>
                         </div>
 
@@ -62,15 +65,15 @@ export default function Hero() {
                         <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-800 w-full max-w-md lg:max-w-none">
                             <div className="text-center lg:text-left">
                                 <p className="text-2xl sm:text-3xl font-bold text-wheelx-yellow bg-gradient-to-br from-wheelx-yellow to-wheelx-red bg-clip-text text-transparent">50K+</p>
-                                <p className="text-sm text-gray-500">Riders</p>
+                                <p className="text-sm text-gray-500">{t("stats.riders")}</p>
                             </div>
                             <div className="text-center lg:text-left">
                                 <p className="text-2xl sm:text-3xl font-bold text-wheelx-yellow bg-gradient-to-br from-wheelx-yellow to-wheelx-red bg-clip-text text-transparent">10K+</p>
-                                <p className="text-sm text-gray-500">Routes</p>
+                                <p className="text-sm text-gray-500">{t("stats.routes")}</p>
                             </div>
                             <div className="text-center lg:text-left">
                                 <p className="text-2xl sm:text-3xl font-bold text-wheelx-yellow bg-gradient-to-br from-wheelx-yellow to-wheelx-red bg-clip-text text-transparent">5K+</p>
-                                <p className="text-sm text-gray-500">Événements</p>
+                                <p className="text-sm text-gray-500">{t("stats.events")}</p>
                             </div>
                         </div>
                     </div>
@@ -94,8 +97,8 @@ export default function Hero() {
 
                                     {/* Header */}
                                     <div className="px-5 mb-6">
-                                        <h3 className="text-white text-lg font-bold">Bonjour, Rider 👋</h3>
-                                        <p className="text-gray-400 text-sm">Prêt pour l&apos;aventure ?</p>
+                                        <h3 className="text-white text-lg font-bold">{t("mockup.greeting")}</h3>
+                                        <p className="text-gray-400 text-sm">{t("mockup.ready")}</p>
                                     </div>
 
                                     {/* Map Card */}
@@ -108,8 +111,8 @@ export default function Hero() {
                                                 </svg>
                                             </div>
                                             <div>
-                                                <p className="text-white font-bold text-sm">Balade du Dimanche</p>
-                                                <p className="text-xs text-gray-400">3 riders en attente</p>
+                                                <p className="text-white font-bold text-sm">{t("mockup.rideName")}</p>
+                                                <p className="text-xs text-gray-400">{t("mockup.ridersWaiting")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -133,8 +136,8 @@ export default function Hero() {
                                     📍
                                 </div>
                                 <div>
-                                    <p className="text-white font-semibold">Live Tracking</p>
-                                    <p className="text-gray-400 text-sm">3 riders nearby</p>
+                                    <p className="text-white font-semibold">{t("mockup.liveTracking")}</p>
+                                    <p className="text-gray-400 text-sm">{t("mockup.ridersNearby")}</p>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +148,8 @@ export default function Hero() {
                                     🛡️
                                 </div>
                                 <div>
-                                    <p className="text-white font-semibold">SOS Activé</p>
-                                    <p className="text-gray-400 text-sm">Protection 24/7</p>
+                                    <p className="text-white font-semibold">{t("mockup.sosActive")}</p>
+                                    <p className="text-gray-400 text-sm">{t("mockup.protection")}</p>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +160,7 @@ export default function Hero() {
             {/* Scroll Indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
                 <a href="#features" className="flex flex-col items-center gap-2 text-gray-500 hover:text-white transition-colors">
-                    <span className="text-sm font-medium">Découvrir</span>
+                    <span className="text-sm font-medium">{t("scroll")}</span>
                     <ChevronDownIcon />
                 </a>
             </div>

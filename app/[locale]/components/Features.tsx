@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 // Icons as SVG components
 const MapIcon = () => (
@@ -38,52 +39,54 @@ const CalendarIcon = () => (
     </svg>
 );
 
-const features = [
-    {
-        icon: <MapIcon />,
-        title: "Navigation GPS Moto",
-        description: "Routes optimisées pour motos : sinueuses, panoramiques, rurales. Import/Export GPX et mode hors-ligne.",
-    },
-    {
-        icon: <LocationIcon />,
-        title: "Suivi Temps Réel",
-        description: "Localisez vos amis sur la carte en temps réel. Parfait pour les balades de groupe.",
-    },
-    {
-        icon: <UsersIcon />,
-        title: "Communauté",
-        description: "Partagez vos aventures, rejoignez des groupes et connectez-vous avec des riders du monde entier.",
-    },
-    {
-        icon: <CalendarIcon />,
-        title: "Événements",
-        description: "Organisez et participez à des balades, road-trips, rencontres et courses moto.",
-    },
-    {
-        icon: <ShieldIcon />,
-        title: "Sécurité SOS",
-        description: "Détection de chute automatique, bouton SOS et alertes à vos contacts d'urgence.",
-    },
-    {
-        icon: <WrenchIcon />,
-        title: "Carnet d'Entretien",
-        description: "Gérez l'entretien de vos motos : vidange, pneus, freins. Rappels automatiques inclus.",
-    },
-];
-
 export default function Features() {
+    const t = useTranslations("Features");
+
+    const featureItems = [
+        {
+            icon: <MapIcon />,
+            title: t("items.gps.title"),
+            description: t("items.gps.desc"),
+        },
+        {
+            icon: <LocationIcon />,
+            title: t("items.tracking.title"),
+            description: t("items.tracking.desc"),
+        },
+        {
+            icon: <UsersIcon />,
+            title: t("items.community.title"),
+            description: t("items.community.desc"),
+        },
+        {
+            icon: <CalendarIcon />,
+            title: t("items.events.title"),
+            description: t("items.events.desc"),
+        },
+        {
+            icon: <ShieldIcon />,
+            title: t("items.sos.title"),
+            description: t("items.sos.desc"),
+        },
+        {
+            icon: <WrenchIcon />,
+            title: t("items.maintenance.title"),
+            description: t("items.maintenance.desc"),
+        },
+    ];
+
     return (
         <section id="features" className="py-24 bg-wheelx-black">
             <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
                 <h2 className="text-4xl md:text-5xl font-black text-center text-white mb-4">
-                    Tout ce dont un <span className="text-wheelx-yellow">rider</span> a besoin
+                    {t("title")}<span className="text-wheelx-yellow">{t("titleAccent")}</span>{t("titleEnd")}
                 </h2>
                 <p className="text-center text-gray-400 max-w-2xl mx-auto mb-16 text-lg">
-                    WheelX combine navigation, communauté et sécurité dans une seule application pensée par et pour les motards.
+                    {t("description")}
                 </p>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {features.map((feature, index) => (
+                    {featureItems.map((feature, index) => (
                         <div
                             key={index}
                             className="bg-wheelx-dark border border-wheelx-gray p-8 rounded-3xl hover:border-wheelx-yellow hover:-translate-y-2 transition-all duration-300 group shadow-lg"

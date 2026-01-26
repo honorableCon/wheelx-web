@@ -1,46 +1,51 @@
 "use client";
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 export default function Footer() {
+    const t = useTranslations("Footer");
+
     return (
         <footer className="bg-wheelx-black border-t border-gray-800 py-16 px-6 md:px-8 lg:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="grid md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="md:col-span-2">
-                        <a href="#" className="flex items-center gap-3 mb-6">
+                        <Link href="/" className="flex items-center gap-3 mb-6">
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark flex items-center justify-center overflow-hidden">
                                 <img src="/logo.png" alt="WheelX Logo" className="w-full h-full object-cover" />
                             </div>
                             <span className="text-2xl font-bold text-white">WheelX</span>
-                        </a>
+                        </Link>
                         <p className="text-gray-500 max-w-sm leading-relaxed text-lg">
-                            La plateforme de référence pour les motards. Explorez, connectez, roulez.
+                            {t("tagline")}
                         </p>
                     </div>
 
                     {/* Links */}
                     <div>
-                        <h4 className="text-white font-bold text-lg mb-6">Produit</h4>
+                        <h4 className="text-white font-bold text-lg mb-6">{t("sections.product.title")}</h4>
                         <ul className="space-y-4">
-                            <li><a href="#features" className="text-gray-400 hover:text-white transition-colors">Fonctionnalités</a></li>
-                            <li><a href="#faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                            <li><a href="#download" className="text-gray-400 hover:text-white transition-colors">Télécharger</a></li>
+                            <li><a href="#features" className="text-gray-400 hover:text-white transition-colors">{t("sections.product.features")}</a></li>
+                            <li><a href="#faq" className="text-gray-400 hover:text-white transition-colors">{t("sections.product.faq")}</a></li>
+                            <li><a href="#download" className="text-gray-400 hover:text-white transition-colors">{t("sections.product.download")}</a></li>
                         </ul>
                     </div>
 
+                    {/* Legal */}
                     <div>
-                        <h4 className="text-white font-bold text-lg mb-6">Légal</h4>
+                        <h4 className="text-white font-bold text-lg mb-6">{t("sections.legal.title")}</h4>
                         <ul className="space-y-4">
-                            <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Confidentialité</a></li>
-                            <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">Conditions</a></li>
-                            <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                            <li><Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">{t("sections.legal.privacy")}</Link></li>
+                            <li><Link href="/terms" className="text-gray-400 hover:text-white transition-colors">{t("sections.legal.terms")}</Link></li>
+                            <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors">{t("sections.legal.contact")}</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
                     <p className="text-gray-600">
-                        © 2026 WheelX. Tous droits réservés.
+                        {t("copyright")}
                     </p>
                     <div className="flex gap-6">
                         <a href="#" className="text-gray-500 hover:text-wheelx-yellow transition-colors">

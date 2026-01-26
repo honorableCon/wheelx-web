@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 const AppleIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -13,6 +14,8 @@ const PlayStoreIcon = () => (
 );
 
 export default function DownloadCTA() {
+    const t = useTranslations("DownloadCTA");
+
     return (
         <section id="download" className="py-32 bg-gray-900 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
@@ -22,20 +25,20 @@ export default function DownloadCTA() {
 
             <div className="max-w-4xl mx-auto px-6 md:px-8 text-center relative z-10">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8">
-                    Prêt à <span className="bg-gradient-to-r from-wheelx-yellow via-white to-wheelx-yellow bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer">rejoindre</span> la communauté ?
+                    {t("title")}<span className="bg-gradient-to-r from-wheelx-yellow via-white to-wheelx-yellow bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer">{t("titleAccent")}</span>{t("titleEnd")}
                 </h2>
                 <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                    Téléchargez WheelX gratuitement et commencez à explorer le monde à deux roues avec des milliers de riders.
+                    {t("description")}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-bold text-lg px-8 py-4 rounded-full shadow-xl shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
                         <AppleIcon />
-                        Télécharger sur App Store
+                        {t("appStore")}
                     </a>
                     <a href="#" className="bg-transparent border-2 border-wheelx-metal text-white font-bold text-lg px-8 py-4 rounded-full hover:border-wheelx-yellow hover:text-wheelx-yellow hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
                         <PlayStoreIcon />
-                        Disponible sur Google Play
+                        {t("googlePlay")}
                     </a>
                 </div>
             </div>

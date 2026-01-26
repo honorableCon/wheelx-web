@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import JsonLd from "./components/JsonLd";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { locales } from '@/navigation';
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -16,7 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wheelx.app'),
+  metadataBase: new URL('https://wheelx.bike'),
   title: {
     default: "WheelX - Elevate Your Ride | La communauté des motards",
     template: "%s | WheelX",
@@ -37,11 +41,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WheelX - Elevate Your Ride",
     description: "Rejoignez la communauté WheelX. Navigation GPS moto, suivi de groupe, SOS et événements. Disponible sur iOS et Android.",
-    url: 'https://wheelx.app',
+    url: 'https://wheelx.bike',
     siteName: 'WheelX',
     images: [
       {
-        url: '/og-image.jpg', // Make sure this exists or will exist
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'WheelX App Interface',
@@ -74,16 +78,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  // Ensure that the incoming `locale` is valid
+  if (!locales.includes(locale as any)) {
+    notFound();
+  }
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth">
       <body className={`${outfit.variable} ${inter.variable} antialiased`}>
-        <JsonLd />
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <JsonLd />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

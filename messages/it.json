@@ -1,0 +1,198 @@
+{
+    "Navbar": {
+        "features": "Caratteristiche",
+        "howItWorks": "Come funziona",
+        "faq": "FAQ",
+        "download": "Scarica"
+    },
+    "Hero": {
+        "availability": "Prossimamente su iOS e Android",
+        "title": "Eleva il tuo",
+        "ride": "Viaggio",
+        "description": "L'app definitiva per i motociclisti. Navigazione GPS ottimizzata, tracciamento di gruppo in tempo reale, organizzazione di eventi e una comunità globale di rider.",
+        "appStore": "App Store",
+        "googlePlay": "Google Play",
+        "stats": {
+            "riders": "Rider",
+            "routes": "Percorsi",
+            "events": "Eventi"
+        },
+        "mockup": {
+            "greeting": "Ciao, Rider 👋",
+            "ready": "Pronto per l'avventura?",
+            "rideName": "Giro della Domenica",
+            "ridersWaiting": "3 rider in attesa",
+            "liveTracking": "Tracciamento dal vivo",
+            "ridersNearby": "3 rider nelle vicinanze",
+            "sosActive": "SOS Attivo",
+            "protection": "Protezione 24/7"
+        },
+        "scroll": "Scopri"
+    },
+    "Features": {
+        "title": "Tutto ciò di cui un ",
+        "titleAccent": "rider",
+        "titleEnd": " ha bisogno",
+        "description": "WheelX combina navigazione, comunità e sicurezza in un'unica app pensata da e per i motociclisti.",
+        "items": {
+            "gps": {
+                "title": "Navigazione GPS Moto",
+                "desc": "Percorsi ottimizzati per moto: tortuosi, panoramici, rurali. Importazione/Esportazione GPX e modalità offline."
+            },
+            "tracking": {
+                "title": "Tracciamento in tempo reale",
+                "desc": "Localizza i tuoi amici sulla mappa in tempo reale. Perfetto per i giri di gruppo."
+            },
+            "community": {
+                "title": "Comunità",
+                "desc": "Condividi le tue avventure, unisciti ai gruppi e connettiti con i rider di tutto l'universo."
+            },
+            "events": {
+                "title": "Eventi",
+                "desc": "Raduna e partecipa a giri, road-trip, raduni e gare motociclistiche."
+            },
+            "sos": {
+                "title": "Sicurezza SOS",
+                "desc": "Rilevamento automatico delle cadute, pulsante SOS e avvisi ai tuoi contatti di emergenza."
+            },
+            "maintenance": {
+                "title": "Registro Manutenzione",
+                "desc": "Gestisci la manutenzione della tua moto: olio, pneumatici, freni. Promemoria automatici inclusi."
+            }
+        }
+    },
+    "HowItWorks": {
+        "title": "Come ",
+        "titleAccent": "Gira",
+        "titleEnd": "?",
+        "description": "In 3 passi, inserisci la seconda e unisciti al branco.",
+        "steps": {
+            "step1": {
+                "title": "Installa l'Attrezzatura",
+                "desc": "Scarica l'app sul tuo store. È gratis, è veloce."
+            },
+            "step2": {
+                "title": "Configura la tua Moto",
+                "desc": "Crea il tuo profilo, aggiungi la tua moto. Sei pronto a tracciare."
+            },
+            "step3": {
+                "title": "Gas!",
+                "desc": "Scopri percorsi, unisciti ai gruppi. Guida sicuro."
+            }
+        }
+    },
+    "Stats": {
+        "riders": "Rider attivi",
+        "km": "Km percorsi",
+        "routes": "Percorsi creati",
+        "events": "Eventi"
+    },
+    "FAQ": {
+        "title": "Domande ",
+        "titleAccent": "frequenti",
+        "description": "Tutto quello che c'è da sapere su WheelX",
+        "items": [
+            {
+                "question": "WheelX è gratuito?",
+                "answer": "Sì! WheelX è gratuito con tutte le funzionalità di base. Una versione Premium sarà disponibile per funzionalità avanzate."
+            },
+            {
+                "question": "Su quali piattaforme è disponibile WheelX?",
+                "answer": "WheelX è disponibile su App Store e Google Play Store. Scarica l'app su iOS e Android."
+            },
+            {
+                "question": "Come funziona il tracciamento di gruppo?",
+                "answer": "Crea o unisciti a un giro e segui la posizione di tutti i partecipanti in tempo reale sulla mappa. Perfetto per non perdere mai il tuo gruppo!"
+            },
+            {
+                "question": "La modalità offline funziona?",
+                "answer": "Sì! Scarica le tue mappe in anticipo per navigare anche senza connessione internet. Ideale per zone remote."
+            },
+            {
+                "question": "Come funziona il rilevamento delle cadute?",
+                "answer": "L'app utilizza i sensori del telefono per rilevare le cadute. Un avviso viene inviato automaticamente ai tuoi contatti di emergenza con la tua posizione GPS."
+            }
+        ]
+    },
+    "DownloadCTA": {
+        "title": "Pronto a ",
+        "titleAccent": "unirti",
+        "titleEnd": " alla comunità?",
+        "description": "Scarica gratuitamente WheelX e inizia a esplorare il mondo su due ruote con migliaia di rider.",
+        "appStore": "Scarica su App Store",
+        "googlePlay": "Disponibile su Google Play"
+    },
+    "Footer": {
+        "tagline": "La piattaforma di riferimento per i motociclisti. Esplora, connettiti, guida.",
+        "sections": {
+            "product": {
+                "title": "Prodotto",
+                "features": "Caratteristiche",
+                "faq": "FAQ",
+                "download": "Scarica"
+            },
+            "legal": {
+                "title": "Legale",
+                "privacy": "Privacy",
+                "terms": "Condizioni",
+                "contact": "Contatto"
+            }
+        },
+        "copyright": "© 2026 WheelX. Tutti i diritti riservati."
+    },
+    "Contact": {
+        "title": "Contattaci",
+        "titleAccent": "Subito",
+        "description": "Hai una domanda o un feedback? Ci piacerebbe sentirti.",
+        "info": {
+            "title": "Informazioni di Contatto",
+            "email": "Scrivici",
+            "follow": "Segui il nostro viaggio"
+        },
+        "form": {
+            "name": "Il tuo Nome",
+            "email": "La tua Email",
+            "message": "Il tuo Messaggio",
+            "send": "Invia Messaggio",
+            "success": "Messaggio inviato! Ti risponderemo presto."
+        }
+    },
+    "Terms": {
+        "title": "Termini di ",
+        "titleAccent": "Servizio",
+        "lastUpdated": "Ultimo aggiornamento: Gennaio 2026",
+        "sections": {
+            "acceptance": {
+                "title": "1. Accettazione dei Termini",
+                "content": "Accedendo o utilizzando WheelX, accetti di essere vincolato da questi Termini di Servizio e da tutte le leggi e i regolamenti applicabili."
+            },
+            "usage": {
+                "title": "2. Licenza d'Uso",
+                "content": "È concesso il permesso di scaricare temporaneamente una copia dell'app WheelX solo per visione transitoria personale e non commerciale."
+            },
+            "safety": {
+                "title": "3. Sicurezza del Rider",
+                "content": "WheelX è uno strumento di navigazione e comunità. Priorità sempre alla sicurezza stradale, segui le leggi del traffico e non usare mai l'app in modo da distrarti."
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Informativa sulla ",
+        "titleAccent": "Privacy",
+        "lastUpdated": "Ultimo aggiornamento: Gennaio 2026",
+        "sections": {
+            "data": {
+                "title": "1. Raccolta Dati",
+                "content": "Raccogliamo dati sulla posizione per fornire navigazione GPS, tracking di gruppo e funzioni SOS. Questi dati vengono raccolti solo quando utilizzi queste funzioni."
+            },
+            "sharing": {
+                "title": "2. Condivisione Dati",
+                "content": "Non vendiamo i tuoi dati personali. I dati sulla posizione per i giri di gruppo sono condivisi solo con i partecipanti al giro a cui ti sei unito."
+            },
+            "security": {
+                "title": "3. Sicurezza",
+                "content": "Implementiamo misure di sicurezza standard del settore per proteggere le tue informazioni e garantire che i tuoi dati di viaggio rimangano privati."
+            }
+        }
+    }
+}

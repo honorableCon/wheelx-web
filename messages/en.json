@@ -1,0 +1,198 @@
+{
+    "Navbar": {
+        "features": "Features",
+        "howItWorks": "How it works",
+        "faq": "FAQ",
+        "download": "Download"
+    },
+    "Hero": {
+        "availability": "Coming soon on iOS & Android",
+        "title": "Elevate Your",
+        "ride": "Ride",
+        "description": "The ultimate app for bikers. Optimized GPS navigation, real-time group tracking, event organization, and a global community of riders.",
+        "appStore": "App Store",
+        "googlePlay": "Google Play",
+        "stats": {
+            "riders": "Riders",
+            "routes": "Routes",
+            "events": "Events"
+        },
+        "mockup": {
+            "greeting": "Hello, Rider 👋",
+            "ready": "Ready for adventure?",
+            "rideName": "Sunday Ride",
+            "ridersWaiting": "3 riders waiting",
+            "liveTracking": "Live Tracking",
+            "ridersNearby": "3 riders nearby",
+            "sosActive": "SOS Activated",
+            "protection": "24/7 Protection"
+        },
+        "scroll": "Discover"
+    },
+    "Features": {
+        "title": "Everything a ",
+        "titleAccent": "rider",
+        "titleEnd": " needs",
+        "description": "WheelX combines navigation, community and safety in a single app designed by and for bikers.",
+        "items": {
+            "gps": {
+                "title": "Moto GPS Navigation",
+                "desc": "Optimized routes for motorcycles: twisty, scenic, rural. GPX Import/Export and offline mode."
+            },
+            "tracking": {
+                "title": "Real-time Tracking",
+                "desc": "Locate your friends on the map in real-time. Perfect for group rides."
+            },
+            "community": {
+                "title": "Community",
+                "desc": "Share your adventures, join groups and connect with riders from all over the world."
+            },
+            "events": {
+                "title": "Events",
+                "desc": "Organize and participate in rides, road-trips, meetups and bike races."
+            },
+            "sos": {
+                "title": "SOS Safety",
+                "desc": "Automatic fall detection, SOS button and alerts to your emergency contacts."
+            },
+            "maintenance": {
+                "title": "Maintenance Log",
+                "desc": "Manage your bike maintenance: oil changes, tires, brakes. Automatic reminders included."
+            }
+        }
+    },
+    "HowItWorks": {
+        "title": "How it ",
+        "titleAccent": "Rolls",
+        "titleEnd": "?",
+        "description": "In 3 steps, shift to second and join the pack.",
+        "steps": {
+            "step1": {
+                "title": "Install the Gear",
+                "desc": "Download the app on your store. It's free, it's fast."
+            },
+            "step2": {
+                "title": "Set Up Your Bike",
+                "desc": "Create your profile, add your bike. You're ready to hit the road."
+            },
+            "step3": {
+                "title": "Gas!",
+                "desc": "Discover routes, join groups. Ride safe."
+            }
+        }
+    },
+    "Stats": {
+        "riders": "Active Riders",
+        "km": "Km travelled",
+        "routes": "Routes created",
+        "events": "Events"
+    },
+    "FAQ": {
+        "title": "Frequently Asked ",
+        "titleAccent": "Questions",
+        "description": "Everything you need to know about WheelX",
+        "items": [
+            {
+                "question": "Is WheelX free?",
+                "answer": "Yes! WheelX is free with all basic features. A Premium version will be available for advanced features."
+            },
+            {
+                "question": "Which platforms is WheelX available on?",
+                "answer": "WheelX is available on iOS and Android. Download the app on the App Store or Google Play Store."
+            },
+            {
+                "question": "How does group tracking work?",
+                "answer": "Create or join a ride, and follow the position of all participants in real-time on the map. Perfect for never losing your group!"
+            },
+            {
+                "question": "Does offline mode work?",
+                "answer": "Yes! Download your maps in advance to navigate even without an internet connection. Ideal for remote areas."
+            },
+            {
+                "question": "How does fall detection work?",
+                "answer": "The app uses your phone's sensors to detect falls. An alert is automatically sent to your emergency contacts with your GPS position."
+            }
+        ]
+    },
+    "DownloadCTA": {
+        "title": "Ready to ",
+        "titleAccent": "join",
+        "titleEnd": " the community?",
+        "description": "Download WheelX for free and start exploring the world on two wheels with thousands of riders.",
+        "appStore": "Download on App Store",
+        "googlePlay": "Available on Google Play"
+    },
+    "Footer": {
+        "tagline": "The ultimate platform for bikers. Explore, connect, ride.",
+        "sections": {
+            "product": {
+                "title": "Product",
+                "features": "Features",
+                "faq": "FAQ",
+                "download": "Download"
+            },
+            "legal": {
+                "title": "Legal",
+                "privacy": "Privacy",
+                "terms": "Terms",
+                "contact": "Contact"
+            }
+        },
+        "copyright": "© 2026 WheelX. All rights reserved."
+    },
+    "Contact": {
+        "title": "Get in ",
+        "titleAccent": "Touch",
+        "description": "Have a question or feedback? We'd love to hear from you.",
+        "info": {
+            "title": "Contact Information",
+            "email": "Email us",
+            "follow": "Follow our ride"
+        },
+        "form": {
+            "name": "Your Name",
+            "email": "Your Email",
+            "message": "Your Message",
+            "send": "Send Message",
+            "success": "Message sent! We'll get back to you soon."
+        }
+    },
+    "Terms": {
+        "title": "Terms of ",
+        "titleAccent": "Service",
+        "lastUpdated": "Last updated: January 2026",
+        "sections": {
+            "acceptance": {
+                "title": "1. Acceptance of Terms",
+                "content": "By accessing or using WheelX, you agree to be bound by these Terms of Service and all applicable laws and regulations."
+            },
+            "usage": {
+                "title": "2. Use License",
+                "content": "Permission is granted to temporarily download one copy of the WheelX app for personal, non-commercial transitory viewing only."
+            },
+            "safety": {
+                "title": "3. Rider Safety",
+                "content": "WheelX is a navigation and community tool. Always prioritize road safety, follow local traffic laws, and never use the app while operating your motorcycle in a way that distracts you."
+            }
+        }
+    },
+    "Privacy": {
+        "title": "Privacy ",
+        "titleAccent": "Policy",
+        "lastUpdated": "Last updated: January 2026",
+        "sections": {
+            "data": {
+                "title": "1. Data Collection",
+                "content": "We collect location data to provide GPS navigation, group tracking, and SOS features. This data is only collected when you use these features."
+            },
+            "sharing": {
+                "title": "2. Data Sharing",
+                "content": "We do not sell your personal data. Location data for group rides is only shared with the members of the ride you have joined."
+            },
+            "security": {
+                "title": "3. Security",
+                "content": "We implement industry-standard security measures to protect your information and ensure your ride data remains private."
+            }
+        }
+    }
+}

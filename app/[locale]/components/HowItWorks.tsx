@@ -1,6 +1,15 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 export default function HowItWorks() {
+    const t = useTranslations("HowItWorks");
+
+    const steps = [
+        { step: "01", title: t("steps.step1.title"), desc: t("steps.step1.desc") },
+        { step: "02", title: t("steps.step2.title"), desc: t("steps.step2.desc") },
+        { step: "03", title: t("steps.step3.title"), desc: t("steps.step3.desc") },
+    ];
+
     return (
         <section id="how-it-works" className="py-24 bg-[#111] relative overflow-hidden">
             {/* Asphalt Texture Effect */}
@@ -12,10 +21,10 @@ export default function HowItWorks() {
 
             <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative z-10">
                 <h2 className="text-4xl md:text-5xl font-black text-center text-white mb-4 uppercase tracking-tighter transform -skew-x-6">
-                    Comment ça <span className="text-wheelx-yellow inline-block border-b-4 border-wheelx-yellow">Roule</span> ?
+                    {t("title")}<span className="text-wheelx-yellow inline-block border-b-4 border-wheelx-yellow">{t("titleAccent")}</span>{t("titleEnd")}
                 </h2>
                 <p className="text-center text-gray-400 max-w-2xl mx-auto mb-20 text-lg font-medium">
-                    En 3 étapes, passez la seconde et rejoignez la meute.
+                    {t("description")}
                 </p>
 
                 <div className="grid md:grid-cols-3 gap-12 relative">
@@ -23,11 +32,7 @@ export default function HowItWorks() {
                     <div className="hidden md:block absolute top-[60px] left-0 right-0 h-4 bg-[#1a1a1a] border-y-2 border-gray-700 -z-10 transform -skew-y-2"></div>
                     <div className="hidden md:block absolute top-[66px] left-0 right-0 h-0.5 border-t-2 border-dashed border-wheelx-yellow -z-10 transform -skew-y-2 opacity-80"></div>
 
-                    {[
-                        { step: "01", title: "Installe le Matos", desc: "Télécharge l'appli sur ton store. C'est gratuit, c'est rapide." },
-                        { step: "02", title: "Configure ta Bécane", desc: "Crée ton profil, ajoute ta moto. T'es prêt à tracer." },
-                        { step: "03", title: "Gaz !", desc: "Découvre des routes, rejoins des groupes. Ride safe." },
-                    ].map((item, index) => (
+                    {steps.map((item, index) => (
                         <div key={index} className="flex flex-col items-center group">
                             <div className="w-32 h-32 mb-8 relative flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                                 {/* Tire Shape Background */}

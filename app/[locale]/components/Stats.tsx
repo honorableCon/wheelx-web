@@ -1,13 +1,16 @@
 "use client";
-
-const stats = [
-    { number: "50K+", label: "Riders actifs" },
-    { number: "1M+", label: "Km parcourus" },
-    { number: "10K+", label: "Routes créées" },
-    { number: "5K+", label: "Événements" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Stats() {
+    const t = useTranslations("Stats");
+
+    const stats = [
+        { number: "50K+", label: t("riders") },
+        { number: "1M+", label: t("km") },
+        { number: "10K+", label: t("routes") },
+        { number: "5K+", label: t("events") },
+    ];
+
     return (
         <section className="py-20 bg-gradient-to-r from-wheelx-yellow to-wheelx-yellow-dark">
             <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
