@@ -1,8 +1,13 @@
-const API_URL = process.env.API_URL || "http://localhost:3001/api/v1";
+// const API_URL = process.env.API_URL || "http://localhost:3001/api/v1";
+const API_URL = "https://wheelx.smartdevafrica.com/api/v1";
 
 function getAuthHeaders(): Record<string, string> {
     // Helper to get the token from document.cookie
     // Note: This only works in the browser (client-side)
+
+    console.log("API_URL", API_URL);
+
+
     if (typeof document === 'undefined') return {};
 
     const match = document.cookie.match(new RegExp('(^| )wheelx_token=([^;]+)'));
