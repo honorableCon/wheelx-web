@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { Link } from "@/navigation";
 
 export default function Footer() {
@@ -12,8 +13,8 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <Link href="/" className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark flex items-center justify-center overflow-hidden">
-                                <img src="/logo.png" alt="WheelX Logo" className="w-full h-full object-cover" />
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark flex items-center justify-center overflow-hidden relative">
+                                <Image src="/logo.png" alt="WheelX Logo" fill className="object-cover" sizes="40px" />
                             </div>
                             <span className="text-2xl font-bold text-white">WheelX</span>
                         </Link>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useSearchParams } from "next/navigation";
 import { Lock } from "lucide-react";
 
 export default function LoginPage() {
@@ -9,21 +10,29 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get("redirect") || "/private/dashboard";
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const res = await fetch(process.env.API_URL + "/auth/login", {
+            console.log("Attempting login to:", process.env.NEXT_PUBLIC_API_URL || "fallback");
+            const res = await fetch((process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1") + "/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
             });
 
-            if (!res.ok) throw new Error("Invalid credentials");
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({}));
+                console.error("Login failed response:", errorData);
+                throw new Error("Invalid credentials");
+            }
 
             const json = await res.json();
+            console.log("Login success response structure:", Object.keys(json));
 
             // Backend wraps response in { data: { accessToken: ... }, status: ... }
             const data = json.data || json;
@@ -31,13 +40,16 @@ export default function LoginPage() {
 
             document.cookie = `wheelx_admin_token=active; path=/; max-age=86400`; // For middleware
             if (token) {
+                console.log("Token found, setting cookie.");
                 document.cookie = `wheelx_token=${token}; path=/; max-age=86400`; // For API calls
             } else {
-                console.error("No token found in login response!");
+                console.error("No token found in login response! Data keys:", Object.keys(data));
             }
 
-            router.push("/private/dashboard");
+            console.log("Redirecting to:", redirectTo);
+            router.push(redirectTo);
         } catch (err) {
+            console.error("Login catch block error:", err);
             alert("Login failed. Check your credentials.");
         } finally {
             setLoading(false);

@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
     localePrefix: 'always'
 });
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Check for private routes - they now start with /locale/private
@@ -27,11 +27,19 @@ export function proxy(request: NextRequest) {
     const isPrivatePage = locales.some(locale => pathname.startsWith(`/${locale}/private`)) || pathname.startsWith('/private');
 
     if (isPrivatePage) {
-        const token = request.cookies.get('wheelx_admin_token');
+        const token = request.cookies.get('wheelx_admin_token')?.value || request.cookies.get('wheelx_token')?.value;
         if (!token) {
-            // Redirect to login with the current locale if possible
+            // Strip locale from pathname for the redirect parameter
+            const segments = pathname.split('/');
+            const possibleLocale = segments[1];
+            const isLocale = locales.includes(possibleLocale as any);
+            const redirectPath = isLocale ? '/' + segments.slice(2).join('/') : pathname;
+            const fullRedirect = redirectPath + request.nextUrl.search;
+
             const locale = locales.find(l => pathname.startsWith(`/${l}`)) || defaultLocale;
-            return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
+            const loginUrl = new URL(`/${locale}/auth/login`, request.url);
+            loginUrl.searchParams.set('redirect', fullRedirect);
+            return NextResponse.redirect(loginUrl);
         }
     }
 

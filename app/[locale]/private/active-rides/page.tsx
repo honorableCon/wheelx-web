@@ -13,26 +13,32 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { fetchActiveRides, stopActiveRide } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useToast } from "../providers";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function ActiveRidesPage() {
     const [rides, setRides] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
 
     useEffect(() => {
         loadData();
-        const interval = setInterval(loadData, 10000); // Polling every 10s
+        const interval = setInterval(loadData, 15000); // Polling every 15s
         return () => clearInterval(interval);
     }, [selectedCountry]);
 
     const loadData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const data = await fetchActiveRides(selectedCountry);
             setRides(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error(error);
             setRides([]);
+            setError("Unable to load active rides. Please retry.");
         }
         setLoading(false);
     };
@@ -41,9 +47,10 @@ export default function ActiveRidesPage() {
         if (!confirm("Are you sure you want to emergency stop this ride?")) return;
         const success = await stopActiveRide(rideId);
         if (success) {
+            showToast({ title: "Ride stopped", variant: 'success' });
             loadData();
         } else {
-            alert("Failed to stop ride");
+            showToast({ title: "Failed to stop ride", variant: 'error' });
         }
     };
 
@@ -60,6 +67,11 @@ export default function ActiveRidesPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">

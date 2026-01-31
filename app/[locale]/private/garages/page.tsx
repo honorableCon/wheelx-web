@@ -13,6 +13,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { fetchGarages, deleteGarage, updateGarage, createGarage } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useCountryFilter } from "../lib/useCountryFilter";
+import { useToast } from "../providers";
 
 export default function GaragesPage() {
     const [garages, setGarages] = useState<any[]>([]);
@@ -42,8 +44,11 @@ export default function GaragesPage() {
         isPartner: false,
         verified: false,
     });
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
     const [search, setSearch] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
+    const [actionLoading, setActionLoading] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -54,6 +59,7 @@ export default function GaragesPage() {
 
     const loadData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const res = await fetchGarages(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
@@ -65,19 +71,22 @@ export default function GaragesPage() {
         } catch (error) {
             console.error("Failed to load garages:", error);
             setGarages([]);
+            setError("Unable to load garages. Please retry.");
         }
         setLoading(false);
     };
 
     const handleDelete = async (id: string, name: string) => {
-        if (confirm(`Are you sure you want to delete ${name}? This action cannot be undone.`)) {
-            const success = await deleteGarage(id);
-            if (success) {
-                loadData();
-            } else {
-                alert("Failed to delete garage.");
-            }
+        if (!confirm(`Are you sure you want to delete ${name}? This action cannot be undone.`)) return;
+        setActionLoading(true);
+        const success = await deleteGarage(id);
+        if (success) {
+            showToast({ title: "Garage deleted", variant: 'success' });
+            loadData();
+        } else {
+            showToast({ title: "Failed to delete garage", variant: 'error' });
         }
+        setActionLoading(false);
     };
 
     const startEdit = (garage: any) => {
@@ -133,25 +142,29 @@ export default function GaragesPage() {
         delete data.latitude;
         delete data.longitude;
 
+        setActionLoading(true);
         if (isCreating) {
             const success = await createGarage(data);
             if (success) {
+                showToast({ title: "Garage created", variant: 'success' });
                 setEditingGarage(null);
                 setIsCreating(false);
                 loadData();
             } else {
-                alert("Failed to create garage.");
+                showToast({ title: "Failed to create garage", variant: 'error' });
             }
         } else {
             if (!editingGarage) return;
             const success = await updateGarage(editingGarage._id || editingGarage.id, data);
             if (success) {
+                showToast({ title: "Garage updated", variant: 'success' });
                 setEditingGarage(null);
                 loadData();
             } else {
-                alert("Failed to update garage.");
+                showToast({ title: "Failed to update garage", variant: 'error' });
             }
         }
+        setActionLoading(false);
     };
 
     return (
@@ -181,6 +194,11 @@ export default function GaragesPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">
@@ -248,7 +266,7 @@ export default function GaragesPage() {
                                     </div>
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    <div className="flex justify-end gap-2">
+                                    <div className="flex justify-end gap-3">
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -261,6 +279,7 @@ export default function GaragesPage() {
                                             variant="ghost"
                                             size="sm"
                                             className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                            disabled={actionLoading}
                                             onClick={() => handleDelete(garage._id || garage.id, garage.name)}
                                         >
                                             Delete

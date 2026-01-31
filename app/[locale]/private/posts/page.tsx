@@ -12,7 +12,9 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import CountrySelector from "../../components/CountrySelector";
-import { fetchPosts } from "../lib/api";
+import { deletePost, fetchPosts } from "../lib/api";
+import { useToast } from "../providers";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function PostsPage() {
     const [posts, setPosts] = useState<any[]>([]);
@@ -21,7 +23,10 @@ export default function PostsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalPosts, setTotalPosts] = useState(0);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
+    const [actionLoading, setActionLoading] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -32,6 +37,7 @@ export default function PostsPage() {
 
     const loadData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const res = await fetchPosts(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
@@ -43,8 +49,23 @@ export default function PostsPage() {
         } catch (error) {
             console.error(error);
             setPosts([]);
+            setError("Unable to load posts. Please retry.");
+            showToast({ title: "Failed to load posts", variant: 'error' });
         }
         setLoading(false);
+    };
+
+    const handleDelete = async (postId: string) => {
+        if (!confirm("Delete this post?")) return;
+        setActionLoading(true);
+        const ok = await deletePost(postId);
+        if (ok) {
+            showToast({ title: "Post deleted", variant: 'success' });
+            loadData();
+        } else {
+            showToast({ title: "Failed to delete post", variant: 'error' });
+        }
+        setActionLoading(false);
     };
 
     return (
@@ -73,11 +94,17 @@ export default function PostsPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">
                             <TableHead className="w-[400px]">Content</TableHead>
                             <TableHead>Author</TableHead>
+                            <TableHead>Country</TableHead>
                             <TableHead>Likes</TableHead>
                             <TableHead>Date</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
@@ -100,11 +127,20 @@ export default function PostsPage() {
                                     {post.content || post.caption || 'No content'}
                                 </TableCell>
                                 <TableCell className="text-slate-600">{post.user?.name || 'Unknown'}</TableCell>
+                                    <TableCell className="text-slate-600">{post.country || '—'}</TableCell>
                                 <TableCell className="text-slate-600">{post.likes?.length || 0}</TableCell>
                                 <TableCell className="text-slate-500">{new Date(post.createdAt).toLocaleDateString()}</TableCell>
-                                <TableCell className="text-right">
-                                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50">Delete</Button>
-                                </TableCell>
+                                    <TableCell className="text-right">
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                                            disabled={actionLoading}
+                                            onClick={() => handleDelete(post._id || post.id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
                             </TableRow>
                         ))}
                         {!loading && posts.length === 0 && (

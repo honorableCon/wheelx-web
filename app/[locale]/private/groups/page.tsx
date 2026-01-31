@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { fetchGroups } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function GroupsPage() {
     const [groups, setGroups] = useState<any[]>([]);
@@ -21,7 +22,7 @@ export default function GroupsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalGroups, setTotalGroups] = useState(0);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
 
     useEffect(() => {
         const timer = setTimeout(() => {

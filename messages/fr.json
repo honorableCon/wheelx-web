@@ -1,4 +1,100 @@
 {
+    "Meta": {
+        "title": "WheelX - L'application ultime pour motards",
+        "description": "L'application ultime pour les motards. Navigation GPS, suivi de groupe en temps réel, événements et une communauté mondiale de riders.",
+        "keywords": "moto, motard, GPS, navigation, communauté, balade groupe, événements, SOS, sécurité, entretien"
+    },
+    "Admin": {
+        "sidebar": {
+            "title": "WHEELX",
+            "admin": "ADMIN",
+            "dashboard": "Tableau de bord",
+            "users": "Utilisateurs",
+            "groups": "Groupes",
+            "posts": "Publications",
+            "events": "Événements",
+            "activeRides": "Balades en cours",
+            "rideHistory": "Historique",
+            "garages": "Garages",
+            "reports": "Signalements",
+            "notifications": "Notifications",
+            "backToWebsite": "Retour au site",
+            "signOut": "Déconnexion"
+        },
+        "dashboard": {
+            "title": "Vue d'ensemble",
+            "welcome": "Bienvenue, Admin",
+            "loading": "Chargement...",
+            "totalUsers": "Utilisateurs",
+            "activeRides": "Balades actives",
+            "pendingReports": "Signalements en attente",
+            "userGrowth": "Croissance utilisateurs",
+            "weeklyActivity": "Activité hebdomadaire",
+            "recentActivity": "Activité récente"
+        },
+        "users": {
+            "title": "Gestion des utilisateurs",
+            "search": "Rechercher...",
+            "name": "Nom",
+            "email": "Email",
+            "country": "Pays",
+            "joined": "Inscrit",
+            "status": "Statut",
+            "actions": "Actions",
+            "active": "Actif",
+            "suspended": "Suspendu",
+            "view": "Voir",
+            "edit": "Modifier",
+            "suspend": "Suspendre",
+            "activate": "Activer"
+        },
+        "groups": {
+            "title": "Gestion des groupes",
+            "search": "Rechercher...",
+            "name": "Nom",
+            "members": "Membres",
+            "created": "Créé",
+            "status": "Statut",
+            "public": "Public",
+            "private": "Privé"
+        },
+        "events": {
+            "title": "Gestion des événements",
+            "search": "Rechercher...",
+            "name": "Nom",
+            "date": "Date",
+            "participants": "Participants",
+            "status": "Statut",
+            "upcoming": "À venir",
+            "ongoing": "En cours",
+            "completed": "Terminé"
+        },
+        "reports": {
+            "title": "Gestion des signalements",
+            "search": "Rechercher...",
+            "type": "Type",
+            "reporter": "Signalé par",
+            "target": "Cible",
+            "status": "Statut",
+            "pending": "En attente",
+            "reviewed": "Examiné",
+            "resolved": "Résolu",
+            "dismissed": "Rejeté"
+        },
+        "common": {
+            "loading": "Chargement...",
+            "noData": "Aucune donnée",
+            "error": "Une erreur est survenue",
+            "retry": "Réessayer",
+            "save": "Enregistrer",
+            "cancel": "Annuler",
+            "delete": "Supprimer",
+            "confirm": "Confirmer",
+            "export": "Exporter",
+            "filter": "Filtrer",
+            "selectCountry": "Sélectionner pays"
+        }
+    },
     "Navbar": {
         "features": "Fonctionnalités",
         "howItWorks": "Comment ça marche",

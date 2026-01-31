@@ -1,4 +1,100 @@
 {
+    "Meta": {
+        "title": "WheelX - The Ultimate Motorcycle Community App",
+        "description": "The ultimate app for bikers. GPS navigation, real-time group tracking, events and a global community of riders.",
+        "keywords": "motorcycle, biker, GPS, navigation, community, group ride, events, SOS, safety, maintenance"
+    },
+    "Admin": {
+        "sidebar": {
+            "title": "WHEELX",
+            "admin": "ADMIN",
+            "dashboard": "Dashboard",
+            "users": "Users",
+            "groups": "Groups",
+            "posts": "Posts",
+            "events": "Events",
+            "activeRides": "Active Rides",
+            "rideHistory": "Ride History",
+            "garages": "Garages",
+            "reports": "Reports",
+            "notifications": "Notifications",
+            "backToWebsite": "Back to Website",
+            "signOut": "Sign Out"
+        },
+        "dashboard": {
+            "title": "Dashboard Overview",
+            "welcome": "Welcome, Admin",
+            "loading": "Loading dashboard...",
+            "totalUsers": "Total Users",
+            "activeRides": "Active Rides",
+            "pendingReports": "Pending Reports",
+            "userGrowth": "User Growth",
+            "weeklyActivity": "Weekly Ride Activity",
+            "recentActivity": "Recent Community Activity"
+        },
+        "users": {
+            "title": "Users Management",
+            "search": "Search users...",
+            "name": "Name",
+            "email": "Email",
+            "country": "Country",
+            "joined": "Joined",
+            "status": "Status",
+            "actions": "Actions",
+            "active": "Active",
+            "suspended": "Suspended",
+            "view": "View",
+            "edit": "Edit",
+            "suspend": "Suspend",
+            "activate": "Activate"
+        },
+        "groups": {
+            "title": "Groups Management",
+            "search": "Search groups...",
+            "name": "Name",
+            "members": "Members",
+            "created": "Created",
+            "status": "Status",
+            "public": "Public",
+            "private": "Private"
+        },
+        "events": {
+            "title": "Events Management",
+            "search": "Search events...",
+            "name": "Name",
+            "date": "Date",
+            "participants": "Participants",
+            "status": "Status",
+            "upcoming": "Upcoming",
+            "ongoing": "Ongoing",
+            "completed": "Completed"
+        },
+        "reports": {
+            "title": "Reports Management",
+            "search": "Search reports...",
+            "type": "Type",
+            "reporter": "Reporter",
+            "target": "Target",
+            "status": "Status",
+            "pending": "Pending",
+            "reviewed": "Reviewed",
+            "resolved": "Resolved",
+            "dismissed": "Dismissed"
+        },
+        "common": {
+            "loading": "Loading...",
+            "noData": "No data available",
+            "error": "An error occurred",
+            "retry": "Retry",
+            "save": "Save",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "confirm": "Confirm",
+            "export": "Export",
+            "filter": "Filter",
+            "selectCountry": "Select country"
+        }
+    },
     "Navbar": {
         "features": "Features",
         "howItWorks": "How it works",

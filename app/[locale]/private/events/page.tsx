@@ -10,8 +10,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { fetchEvents } from "../lib/api";
+import { deleteEvent, fetchEvents } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useToast } from "../providers";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function EventsPage() {
     const [events, setEvents] = useState<any[]>([]);
@@ -20,7 +22,10 @@ export default function EventsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalEvents, setTotalEvents] = useState(0);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
+    const [actionLoading, setActionLoading] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -31,6 +36,7 @@ export default function EventsPage() {
 
     const loadData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const res = await fetchEvents(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
@@ -42,8 +48,23 @@ export default function EventsPage() {
         } catch (error) {
             console.error(error);
             setEvents([]);
+            setError("Unable to load events. Please retry.");
+            showToast({ title: "Failed to load events", variant: 'error' });
         }
         setLoading(false);
+    };
+
+    const handleDelete = async (eventId: string) => {
+        if (!confirm("Delete this event?")) return;
+        setActionLoading(true);
+        const ok = await deleteEvent(eventId);
+        if (ok) {
+            showToast({ title: "Event deleted", variant: 'success' });
+            loadData();
+        } else {
+            showToast({ title: "Failed to delete event", variant: 'error' });
+        }
+        setActionLoading(false);
     };
 
     return (
@@ -72,6 +93,11 @@ export default function EventsPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">
@@ -79,6 +105,7 @@ export default function EventsPage() {
                             <TableHead>Date & Time</TableHead>
                             <TableHead>Organizer</TableHead>
                             <TableHead>Attendees</TableHead>
+                            <TableHead>Country</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -103,8 +130,20 @@ export default function EventsPage() {
                                         {event.attendees?.length || 0} Attending
                                     </span>
                                 </TableCell>
+                                <TableCell className="text-slate-600">{event.country || '—'}</TableCell>
                                 <TableCell className="text-right">
-                                    <Button variant="ghost" size="sm" className="hover:text-yellow-600">Details</Button>
+                                    <div className="flex justify-end gap-2">
+                                        <Button variant="ghost" size="sm" className="hover:text-yellow-600">Details</Button>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                                            disabled={actionLoading}
+                                            onClick={() => handleDelete(event._id || event.id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         ))}

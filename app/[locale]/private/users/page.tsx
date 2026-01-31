@@ -13,6 +13,8 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { fetchUsers, banUser, unbanUser } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useToast } from "../providers";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function UsersPage() {
     const [users, setUsers] = useState<any[]>([]);
@@ -21,7 +23,9 @@ export default function UsersPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalUsers, setTotalUsers] = useState(0);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -32,6 +36,7 @@ export default function UsersPage() {
 
     const loadData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const res = await fetchUsers(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
@@ -43,6 +48,7 @@ export default function UsersPage() {
         } catch (e) {
             console.error("Failed to load users", e);
             setUsers([]);
+            setError("Unable to load users. Please retry.");
         }
         setLoading(false);
     };
@@ -56,9 +62,10 @@ export default function UsersPage() {
             : await banUser(user.id || user._id);
 
         if (success) {
+            showToast({ title: `User ${action}ned`, variant: 'success' });
             loadData();
         } else {
-            alert(`Failed to ${action} user`);
+            showToast({ title: `Failed to ${action} user`, variant: 'error' });
         }
     };
 
@@ -88,6 +95,11 @@ export default function UsersPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">
