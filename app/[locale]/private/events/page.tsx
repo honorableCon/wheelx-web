@@ -22,19 +22,24 @@ export default function EventsPage() {
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [totalEvents, setTotalEvents] = useState(0);
-    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter();
     const [error, setError] = useState<string | null>(null);
     const { showToast } = useToast();
     const [actionLoading, setActionLoading] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            loadData();
-        }, 500);
-        return () => clearTimeout(timer);
+        // Only load data if country is available
+        if (selectedCountry) {
+            const timer = setTimeout(() => {
+                loadData();
+            }, 500);
+            return () => clearTimeout(timer);
+        }
     }, [page, search, selectedCountry]);
 
     const loadData = async () => {
+        if (!selectedCountry) return; // Don't fetch without country
+        
         setLoading(true);
         setError(null);
         try {

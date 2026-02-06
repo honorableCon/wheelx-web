@@ -19,34 +19,64 @@ export default function DashboardPage() {
 
     const loadData = async () => {
         setLoading(true);
-        const res = await fetchDashboardStats(selectedCountry);
-        // Backend returns stats object directly
-        setStats(res?.data || res || {});
-        setLoading(false);
+        try {
+            const res = await fetchDashboardStats(selectedCountry);
+            // Backend can return nested or direct structure
+            const data = res?.data || res || {};
+            setStats(data);
+        } catch (error) {
+            console.error('Failed to load dashboard stats:', error);
+            setStats({});
+        } finally {
+            setLoading(false);
+        }
     };
 
-    if (loading) {
-        return <div className="p-8">{t("loading")}</div>;
+    if (loading && !stats) {
+        return (
+            <div className="p-8 flex items-center justify-center min-h-screen">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+                    <p className="text-slate-500">{t("loading")}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!loading && !stats) {
+        return (
+            <div className="p-8 text-center">
+                <p className="text-red-600 mb-4">Failed to load dashboard statistics</p>
+                <button
+                    onClick={loadData}
+                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                >
+                    Retry
+                </button>
+            </div>
+        );
     }
 
     return (
-        <div className="p-8">
-            <div className="max-w-6xl mx-auto">
-                <header className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-bold">{t("title")}</h2>
-                    <div className="flex items-center gap-4">
+        <div className="p-4 md:p-8">
+            <div className="max-w-7xl mx-auto">
+                <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 md:mb-8">
+                    <h2 className="text-2xl md:text-3xl font-bold">{t("title")}</h2>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                         <CountrySelector selectedCountry={selectedCountry} onChange={setSelectedCountry} />
-                        <div className="h-6 w-px bg-slate-200"></div>
-                        <span className="text-sm text-slate-500">{t("welcome")}</span>
-                        <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
+                        <div className="hidden sm:block h-6 w-px bg-slate-200"></div>
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm text-slate-500">{t("welcome")}</span>
+                            <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
+                        </div>
                     </div>
                 </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200">
                         <h3 className="text-sm font-medium text-slate-500 mb-2">{t("totalUsers")}</h3>
-                        <p className="text-3xl font-bold">{stats?.totalUsers?.value || 0}</p>
+                        <p className="text-2xl md:text-3xl font-bold">{stats?.totalUsers?.value || 0}</p>
                         <span className={`text-xs font-medium ${stats?.totalUsers?.trend === 'up' ? 'text-green-600' : 'text-slate-400'}`}>
                             {stats?.totalUsers?.change} {stats?.totalUsers?.label}
                         </span>

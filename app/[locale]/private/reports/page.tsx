@@ -13,21 +13,29 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { fetchReports } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useCountryFilter } from "../lib/useCountryFilter";
 
 export default function ReportsPage() {
     const [reports, setReports] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
-    const [selectedCountry, setSelectedCountry] = useState("");
+    const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter();
     const [totalPages, setTotalPages] = useState(1);
     const [totalReports, setTotalReports] = useState(0);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        loadData();
+        // Only load data if country is available
+        if (selectedCountry) {
+            loadData();
+        }
     }, [page, selectedCountry]);
 
     const loadData = async () => {
+        if (!selectedCountry) return; // Don't fetch without country
+        
         setLoading(true);
+        setError(null);
         try {
             const res = await fetchReports(page, 10, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
@@ -37,10 +45,12 @@ export default function ReportsPage() {
             setTotalPages(meta.totalPages || 1);
             setTotalReports(meta.total || data.length);
         } catch (error) {
-            console.error(error);
+            console.error('Failed to load reports:', error);
             setReports([]);
+            setError('Unable to load reports. Please retry.');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -56,6 +66,11 @@ export default function ReportsPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">

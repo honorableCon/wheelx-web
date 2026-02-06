@@ -11,18 +11,21 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { fetchGroups } from "../lib/api";
+import { fetchRoutes, deleteRoute } from "../lib/api";
 import CountrySelector from "../../components/CountrySelector";
+import { useToast } from "../providers";
 import { useCountryFilter } from "../lib/useCountryFilter";
 
-export default function GroupsPage() {
-    const [groups, setGroups] = useState<any[]>([]);
+export default function RoutesPage() {
+    const [routes, setRoutes] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
     const [totalPages, setTotalPages] = useState(1);
-    const [totalGroups, setTotalGroups] = useState(0);
+    const [totalRoutes, setTotalRoutes] = useState(0);
     const { country: selectedCountry, setCountry: setSelectedCountry } = useCountryFilter();
+    const [error, setError] = useState<string | null>(null);
+    const { showToast } = useToast();
 
     useEffect(() => {
         // Only load data if country is available
@@ -38,34 +41,48 @@ export default function GroupsPage() {
         if (!selectedCountry) return; // Don't fetch without country
         
         setLoading(true);
+        setError(null);
         try {
-            const res = await fetchGroups(page, 10, search, selectedCountry);
+            const res = await fetchRoutes(page, 10, search, selectedCountry);
             const data = Array.isArray(res) ? res : (res.data || []);
             const meta = !Array.isArray(res) && res.meta ? res.meta : { totalPages: 1, total: data.length };
 
-            setGroups(data);
+            setRoutes(data);
             setTotalPages(meta.totalPages || 1);
-            setTotalGroups(meta.total || data.length);
+            setTotalRoutes(meta.total || data.length);
         } catch (e) {
-            console.error("Failed to load groups", e);
-            setGroups([]);
+            console.error("Failed to load routes", e);
+            setRoutes([]);
+            setError("Unable to load routes. Please retry.");
         }
         setLoading(false);
+    };
+
+    const handleDelete = async (routeId: string, routeName: string) => {
+        if (!confirm(`Are you sure you want to delete "${routeName}"?`)) return;
+
+        const success = await deleteRoute(routeId);
+        if (success) {
+            showToast({ title: "Route deleted", variant: 'success' });
+            loadData();
+        } else {
+            showToast({ title: "Failed to delete route", variant: 'error' });
+        }
     };
 
     return (
         <div className="p-8 space-y-8">
             <header className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900">Groups</h1>
-                    <p className="text-slate-500">Manage community groups and memberships.</p>
+                    <h1 className="text-3xl font-bold text-slate-900">Routes</h1>
+                    <p className="text-slate-500">Manage saved routes and GPX imports.</p>
                 </div>
                 <div className="flex gap-4">
                     <CountrySelector selectedCountry={selectedCountry} onChange={(c) => { setSelectedCountry(c); setPage(1); }} />
                     <div className="relative">
                         <input
                             type="text"
-                            placeholder="Search groups..."
+                            placeholder="Search routes..."
                             value={search}
                             onChange={(e) => {
                                 setSearch(e.target.value);
@@ -79,13 +96,21 @@ export default function GroupsPage() {
             </header>
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                {error && (
+                    <div className="bg-red-50 text-red-700 px-4 py-3 border-b border-red-100 text-sm">
+                        {error}
+                    </div>
+                )}
                 <Table>
                     <TableHeader>
                         <TableRow className="bg-slate-50 hover:bg-slate-50">
-                            <TableHead className="w-[80px]">Image</TableHead>
                             <TableHead>Name</TableHead>
-                            <TableHead>Members</TableHead>
-                            <TableHead>Privacy</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Distance</TableHead>
+                            <TableHead>Difficulty</TableHead>
+                            <TableHead>Rating</TableHead>
+                            <TableHead>Views</TableHead>
+                            <TableHead>Favorites</TableHead>
                             <TableHead>Created By</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
@@ -94,44 +119,71 @@ export default function GroupsPage() {
                         {loading ? (
                             Array.from({ length: 5 }).map((_, i) => (
                                 <TableRow key={i}>
-                                    <TableCell><div className="h-10 w-10 bg-slate-100 rounded-lg animate-pulse"></div></TableCell>
                                     <TableCell><div className="h-4 w-32 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-20 bg-slate-100 rounded animate-pulse"></div></TableCell>
                                     <TableCell><div className="h-4 w-16 bg-slate-100 rounded animate-pulse"></div></TableCell>
                                     <TableCell><div className="h-4 w-20 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-12 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-12 bg-slate-100 rounded animate-pulse"></div></TableCell>
+                                    <TableCell><div className="h-4 w-12 bg-slate-100 rounded animate-pulse"></div></TableCell>
                                     <TableCell><div className="h-4 w-24 bg-slate-100 rounded animate-pulse"></div></TableCell>
                                     <TableCell className="text-right"><div className="h-8 w-16 bg-slate-100 rounded animate-pulse ml-auto"></div></TableCell>
                                 </TableRow>
                             ))
-                        ) : groups.map((group) => (
-                            <TableRow key={group._id || group.id} className="hover:bg-slate-50/50 transition-colors">
+                        ) : routes.map((route) => (
+                            <TableRow key={route.id || route._id} className="hover:bg-slate-50/50 transition-colors">
+                                <TableCell className="font-bold text-slate-900">{route.name}</TableCell>
                                 <TableCell>
-                                    <div className="w-10 h-10 rounded-lg bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600 overflow-hidden">
-                                        {group.image ? (
-                                            <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-                                        ) : (
-                                            group.name?.charAt(0) || 'G'
-                                        )}
-                                    </div>
-                                </TableCell>
-                                <TableCell className="font-bold text-slate-900">{group.name}</TableCell>
-                                <TableCell>
-                                    <Badge variant="outline" className="font-normal text-slate-600">{group.members?.length || 0} Members</Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge variant={group.privacy === 'private' ? 'secondary' : 'default'} className={group.privacy === 'private' ? "bg-slate-100 text-slate-600" : "bg-blue-100 text-blue-700 hover:bg-blue-200"}>
-                                        {group.privacy === 'private' ? 'Private' : 'Public'}
+                                    <Badge variant="secondary" className="capitalize">
+                                        {route.type}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-slate-600 text-sm">{group.createdBy?.name || 'Unknown'}</TableCell>
+                                <TableCell className="text-slate-600">{route.distance.toFixed(1)} km</TableCell>
+                                <TableCell>
+                                    <Badge 
+                                        variant={
+                                            route.difficulty === 'easy' ? 'default' : 
+                                            route.difficulty === 'moderate' ? 'secondary' : 
+                                            'destructive'
+                                        }
+                                        className="capitalize"
+                                    >
+                                        {route.difficulty}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>
+                                    <div className="flex items-center gap-1">
+                                        <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                        </svg>
+                                        <span className="text-sm font-medium">{route.rating.toFixed(1)}</span>
+                                    </div>
+                                </TableCell>
+                                <TableCell>
+                                    <span className="text-sm text-slate-600">{route.viewCount || 0}</span>
+                                </TableCell>
+                                <TableCell>
+                                    <span className="text-sm text-slate-600">{route.favoritedBy?.length || 0}</span>
+                                </TableCell>
+                                <TableCell className="text-slate-600">
+                                    {route.createdBy?.displayName || route.createdBy?.username || 'Unknown'}
+                                </TableCell>
                                 <TableCell className="text-right">
-                                    <Button variant="ghost" size="sm" className="hover:text-yellow-600">Manage</Button>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                                        onClick={() => handleDelete(route.id || route._id, route.name)}
+                                    >
+                                        Delete
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         ))}
-                        {!loading && groups.length === 0 && (
+                        {!loading && routes.length === 0 && (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-16 text-slate-400">
-                                    No groups found.
+                                <TableCell colSpan={9} className="text-center py-16 text-slate-400">
+                                    No routes found.
                                 </TableCell>
                             </TableRow>
                         )}
@@ -140,7 +192,7 @@ export default function GroupsPage() {
 
                 {/* Pagination Controls */}
                 <div className="border-t border-slate-100 p-4 flex justify-between items-center">
-                    <span className="text-sm text-slate-500">Showing {groups.length} of {totalGroups} results</span>
+                    <span className="text-sm text-slate-500">Showing {routes.length} of {totalRoutes} results</span>
                     <div className="flex gap-2">
                         <Button
                             variant="outline"

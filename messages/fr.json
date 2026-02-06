@@ -13,11 +13,12 @@
             "groups": "Groupes",
             "posts": "Publications",
             "events": "Événements",
+            "routes": "Itinéraires",
             "activeRides": "Balades en cours",
             "rideHistory": "Historique",
             "garages": "Garages",
             "reports": "Signalements",
-            "notifications": "Notifications",
+            "notifications": "Notificati",
             "backToWebsite": "Retour au site",
             "signOut": "Déconnexion"
         },

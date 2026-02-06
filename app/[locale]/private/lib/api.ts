@@ -68,10 +68,22 @@ async function handleResponse(res: Response) {
         throw new Error('Unauthorized');
     }
     if (!res.ok) {
+        const errorText = await res.text().catch(() => res.statusText);
+        console.error(`API Error [${res.status}]:`, errorText);
         throw new Error(`API Error: ${res.statusText}`);
     }
+    
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Invalid response type');
+    }
+    
     const json = await res.json();
-    return json.data && json.data.data ? json.data : json.data ? json.data : json;
+    // Handle nested data structures: { data: { data: [...] } } or { data: [...] } or direct array
+    if (json.data !== undefined) {
+        return json.data.data !== undefined ? json.data : json.data;
+    }
+    return json;
 }
 
 export async function fetchRides(page = 1, limit = 10, search = "", country = "") {
@@ -334,4 +346,40 @@ export async function fetchCountries() {
     }
 }
 
+export async function fetchCurrentUser() {
+    try {
+        const res = await fetch(`${API_URL}/users/me`, {
+            headers: buildHeaders(),
+        });
+        return await handleResponse(res);
+    } catch (e) {
+        console.error("Failed to fetch current user", e);
+        return null;
+    }
+}
 
+export async function fetchRoutes(page = 1, limit = 10, search = "", country = "") {
+    try {
+        const query = `page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ''}${country ? `&country=${country}` : ''}`;
+        const res = await fetch(`${API_URL}/routes?${query}`, {
+            headers: buildHeaders(country),
+        });
+        return await handleResponse(res);
+    } catch (error) {
+        console.error("Failed to fetch routes", error);
+        return { data: [], meta: { total: 0 } };
+    }
+}
+
+export async function deleteRoute(id: string) {
+    try {
+        const res = await fetch(`${API_URL}/routes/${id}`, {
+            method: 'DELETE',
+            headers: buildHeaders(),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to delete route", error);
+        return false;
+    }
+}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Map, Wrench, FileText, ArrowLeft, MessageSquare, Tent, Calendar, Bell, Activity } from "lucide-react";
+import { LayoutDashboard, Users, Map, Wrench, FileText, ArrowLeft, MessageSquare, Tent, Calendar, Bell, Activity, Route, X } from "lucide-react";
 
 const menuItems = [
     { key: "dashboard", href: "/private/dashboard", icon: LayoutDashboard },
@@ -11,6 +11,7 @@ const menuItems = [
     { key: "groups", href: "/private/groups", icon: Tent },
     { key: "posts", href: "/private/posts", icon: MessageSquare },
     { key: "events", href: "/private/events", icon: Calendar },
+    { key: "routes", href: "/private/routes", icon: Route },
     { key: "activeRides", href: "/private/active-rides", icon: Activity },
     { key: "rideHistory", href: "/private/rides", icon: Map },
     { key: "garages", href: "/private/garages", icon: Wrench },
@@ -18,18 +19,29 @@ const menuItems = [
     { key: "notifications", href: "/private/notifications", icon: Bell },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+    isOpen?: boolean;
+    onClose?: () => void;
+}
+
+export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     const pathname = usePathname();
     const t = useTranslations("Admin.sidebar");
 
-    return (
-        <aside className="w-64 bg-slate-900 text-white p-6 hidden md:flex flex-col min-h-screen">
-            <div className="mb-8">
+    const sidebarContent = (
+        <>
+            <div className="mb-8 flex items-center justify-between">
                 <h1 className="text-xl font-bold tracking-wider">
                     {t("title")} <span className="text-yellow-500">{t("admin")}</span>
                 </h1>
+                <button
+                    onClick={onClose}
+                    className="md:hidden p-2 hover:bg-white/10 rounded-lg"
+                >
+                    <X size={20} />
+                </button>
             </div>
-            <nav className="flex flex-col gap-2 flex-1">
+            <nav className="flex flex-col gap-2 flex-1 overflow-y-auto">
                 {menuItems.map((item) => {
                     const isActive = pathname.startsWith(item.href);
                     const Icon = item.icon;
@@ -37,10 +49,12 @@ export default function Sidebar() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
-                                ? "bg-yellow-500 text-slate-900 font-medium shadow-lg shadow-yellow-500/20"
-                                : "text-slate-400 hover:text-white hover:bg-white/5"
-                                }`}
+                            onClick={onClose}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                                isActive
+                                    ? "bg-yellow-500 text-slate-900 font-medium shadow-lg shadow-yellow-500/20"
+                                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                            }`}
                         >
                             <Icon size={20} />
                             {t(item.key)}
@@ -52,6 +66,7 @@ export default function Sidebar() {
             <div className="pt-6 border-t border-slate-700 flex flex-col gap-2">
                 <Link
                     href="/"
+                    onClick={onClose}
                     className="flex items-center gap-3 px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors"
                 >
                     <ArrowLeft size={16} />
@@ -62,11 +77,10 @@ export default function Sidebar() {
                         document.cookie = "wheelx_admin_token=; path=/; max-age=0";
                         document.cookie = "wheelx_token=; path=/; max-age=0";
 
-                        // Get locale from pathname
                         const segments = window.location.pathname.split('/');
                         const possibleLocale = segments[1];
-                        const hasLocale = ['en', 'fr', 'es', 'it'].includes(possibleLocale);
-                        const localePrefix = hasLocale ? `/${possibleLocale}` : '';
+                        const isLocale = ['en', 'fr', 'es', 'it', 'de', 'pt'].includes(possibleLocale);
+                        const localePrefix = isLocale ? `/${possibleLocale}` : '';
 
                         window.location.href = `${localePrefix}/auth/login`;
                     }}
@@ -76,6 +90,24 @@ export default function Sidebar() {
                     {t("signOut")}
                 </button>
             </div>
-        </aside>
+        </>
+    );
+
+    return (
+        <>
+            {/* Desktop sidebar */}
+            <aside className="hidden md:flex w-64 bg-slate-900 text-white p-6 flex-col min-h-screen">
+                {sidebarContent}
+            </aside>
+            
+            {/* Mobile sidebar */}
+            <aside
+                className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white p-6 flex flex-col transform transition-transform duration-300 md:hidden ${
+                    isOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}
+            >
+                {sidebarContent}
+            </aside>
+        </>
     );
 }
