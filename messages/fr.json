@@ -100,10 +100,11 @@
         "features": "Fonctionnalités",
         "howItWorks": "Comment ça marche",
         "faq": "FAQ",
+        "partners": "Partenaires",
         "download": "Télécharger"
     },
     "Hero": {
-        "availability": "Bientôt disponible sur iOS & Android",
+        "availability": "Disponible sur App Store",
         "title": "Elevate Your",
         "ride": "Ride",
         "description": "L'application ultime pour les motards. Navigation GPS optimisée, suivi de groupe en temps réel, organisation d'événements et une communauté mondiale de riders.",
@@ -140,6 +141,22 @@
                 "title": "Suivi Temps Réel",
                 "desc": "Localisez vos amis sur la carte en temps réel. Parfait pour les balades de groupe."
             },
+            "groups": {
+                "title": "Groupes de Riders",
+                "desc": "Créez ou rejoignez des groupes, partagez des posts, organisez des balades et construisez votre communauté."
+            },
+            "voiceChat": {
+                "title": "Chat Vocal",
+                "desc": "Parlez en mains-libres avec votre groupe pendant la balade via push-to-talk. Restez connectés sans vous arrêter."
+            },
+            "discover": {
+                "title": "Découvrir",
+                "desc": "Explorez des routes partagées, spots moto-friendly, stations-service et points de vue panoramiques autour de vous."
+            },
+            "marketplace": {
+                "title": "Marketplace",
+                "desc": "Achetez et vendez de l'équipement, des pièces et accessoires moto directement au sein de la communauté."
+            },
             "community": {
                 "title": "Communauté",
                 "desc": "Partagez vos aventures, rejoignez des groupes et connectez-vous avec des riders du monde entier."
@@ -151,6 +168,10 @@
             "sos": {
                 "title": "Sécurité SOS",
                 "desc": "Détection de chute automatique, bouton SOS et alertes à vos contacts d'urgence."
+            },
+            "garage": {
+                "title": "Mon Garage",
+                "desc": "Gérez plusieurs motos, suivez le kilométrage et conservez un historique complet de chaque bécane."
             },
             "maintenance": {
                 "title": "Carnet d'Entretien",
@@ -183,6 +204,36 @@
         "km": "Km parcourus",
         "routes": "Routes créées",
         "events": "Événements"
+    },
+    "Partners": {
+        "badge": "Opportunités Business",
+        "title": "Rejoignez le",
+        "titleAccent": "Réseau WheelX",
+        "description": "Associez-vous à nous pour toucher des milliers de riders passionnés. Développez votre business tout en soutenant la communauté motarde.",
+        "categories": {
+            "stations": {
+                "title": "Stations-service",
+                "description": "Offrez des réductions et récompenses exclusives aux riders WheelX dans vos stations."
+            },
+            "garages": {
+                "title": "Garages & Services",
+                "description": "Connectez-vous aux riders qui cherchent entretien, réparations et personnalisation."
+            },
+            "equipment": {
+                "title": "Magasins d'équipement",
+                "description": "Présentez vos équipements, pièces et accessoires à notre communauté active de riders."
+            },
+            "insurance": {
+                "title": "Assurances",
+                "description": "Touchez les riders cherchant une couverture d'assurance moto fiable et protectrice."
+            }
+        },
+        "cta": {
+            "title": "Prêt à devenir partenaire ?",
+            "description": "Contactez notre équipe partenariats pour discuter des opportunités et grandir ensemble.",
+            "button": "Nous contacter",
+            "learnMore": "En savoir plus"
+        }
     },
     "FAQ": {
         "title": "Questions ",
@@ -289,6 +340,118 @@
             "security": {
                 "title": "3. Sécurité",
                 "content": "Nous mettons en œuvre des mesures de sécurité conformes aux standards de l'industrie pour protéger vos informations et garantir que vos données de route restent privées."
+            }
+        }
+    },
+    "PartnersPage": {
+        "meta": {
+            "title": "Partenariat avec WheelX - Rejoignez le Réseau Moto",
+            "description": "Associez-vous à WheelX pour toucher des milliers de riders passionnés. Développez votre business en soutenant la communauté motarde."
+        },
+        "hero": {
+            "badge": "Partenariats Business",
+            "title": "Développez votre business avec",
+            "titleAccent": "le Réseau WheelX",
+            "description": "Connectez-vous à des milliers de riders passionnés et élargissez votre portée dans la communauté motarde. Notre programme partenaire aide les stations-service, garages, magasins d'équipement et assurances à prospérer.",
+            "ctaPrimary": "Devenir Partenaire",
+            "ctaSecondary": "Voir les Avantages"
+        },
+        "benefits": {
+            "title": "Pourquoi s'associer à WheelX?",
+            "description": "Rejoignez un réseau croissant d'entreprises au service de la communauté motarde",
+            "items": {
+                "visibility": {
+                    "title": "Visibilité Accrue",
+                    "description": "Soyez découvert par des milliers de riders actifs cherchant des services près d'eux."
+                },
+                "engagement": {
+                    "title": "Engagement Direct",
+                    "description": "Connectez-vous directement avec votre audience cible via notre plateforme et nos annonces premium."
+                },
+                "data": {
+                    "title": "Insights & Analyses",
+                    "description": "Accédez à des données précieuses sur le comportement et les préférences des riders dans votre zone."
+                },
+                "support": {
+                    "title": "Support Dédié",
+                    "description": "Notre équipe partenariat vous accompagne en continu pour maximiser votre succès."
+                },
+                "integration": {
+                    "title": "Intégration Facile",
+                    "description": "Processus d'intégration simple avec des outils conçus pour votre type d'entreprise."
+                },
+                "growth": {
+                    "title": "Croissance Communautaire",
+                    "description": "Grandissez avec la communauté WheelX et construisez des relations clients durables."
+                }
+            }
+        },
+        "categories": {
+            "title": "Catégories de Partenariat",
+            "description": "Choisissez le modèle de partenariat qui correspond à votre business",
+            "items": {
+                "stations": {
+                    "title": "Stations-service",
+                    "description": "Associez-vous à WheelX pour devenir une destination carburant préférée des riders. Offrez des récompenses exclusives et soyez mis en avant dans notre localisateur de stations.",
+                    "benefits": {
+                        "one": "Placement premium dans notre recherche de stations",
+                        "two": "Programmes de réductions exclusifs pour riders",
+                        "three": "Mises à jour de prix et commodités en temps réel"
+                    }
+                },
+                "garages": {
+                    "title": "Garages & Services",
+                    "description": "Connectez-vous aux riders qui ont besoin d'entretien, de réparations et de personnalisation. Montrez votre expertise et construisez des relations de confiance.",
+                    "benefits": {
+                        "one": "Badge garage vérifié et annonces premium",
+                        "two": "Intégration réservation et prise de rendez-vous",
+                        "three": "Système d'avis et notation clients"
+                    }
+                },
+                "equipment": {
+                    "title": "Magasins d'équipement",
+                    "description": "Promouvez vos équipements, pièces et accessoires auprès d'une communauté engagée de riders cherchant activement du matériel de qualité.",
+                    "benefits": {
+                        "one": "Intégration catalogue produits dans le marketplace",
+                        "two": "Promotions ciblées vers les riders à proximité",
+                        "three": "Sync inventaire et gestion des commandes"
+                    }
+                },
+                "insurance": {
+                    "title": "Assurances",
+                    "description": "Touchez les riders au moment où ils ont le plus besoin de couverture. Proposez des plans d'assurance moto sur mesure avec outils de comparaison faciles.",
+                    "benefits": {
+                        "one": "Annonces premium comparaison d'assurances",
+                        "two": "Intégration demande de devis direct",
+                        "three": "Calculateur de prime et outils de couverture"
+                    }
+                }
+            }
+        },
+        "contact": {
+            "title": "Prêt à Commencer?",
+            "description": "Contactez notre équipe partenariat pour discuter des opportunités et grandir ensemble.",
+            "email": {
+                "label": "Email Partenariat"
+            },
+            "response": {
+                "label": "Délai de Réponse",
+                "time": "Sous 24-48 heures"
+            },
+            "button": "Contacter l'Équipe Partenariat",
+            "form": {
+                "name": "Nom complet",
+                "email": "Adresse email",
+                "company": "Nom de l'entreprise",
+                "category": "Catégorie de partenariat",
+                "selectCategory": "Sélectionner une catégorie...",
+                "message": "Message",
+                "submit": "Envoyer la demande",
+                "sending": "Envoi..."
+            },
+            "success": {
+                "title": "Merci !",
+                "message": "Nous avons reçu votre demande de partenariat et vous répondrons sous 24-48 heures."
             }
         }
     }

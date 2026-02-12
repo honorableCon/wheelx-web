@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const AppleIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -51,14 +52,17 @@ export default function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
-                            <a href="#download" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-semibold py-4 px-8 rounded-full shadow-lg shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                            <a href="https://apps.apple.com/app/wheelxi/id6757822107" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-semibold py-4 px-8 rounded-full shadow-lg shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                                 <AppleIcon />
                                 {t("appStore")}
                             </a>
-                            <a href="#download" className="bg-transparent text-white border-2 border-wheelx-metal font-semibold py-4 px-8 rounded-full hover:border-wheelx-yellow hover:text-wheelx-yellow hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                                <PlayStoreIcon />
-                                {t("googlePlay")}
-                            </a>
+                            <div className="relative">
+                                <span className="bg-transparent text-wheelx-metal border-2 border-wheelx-gray font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-2 cursor-not-allowed opacity-50">
+                                    <PlayStoreIcon />
+                                    {t("googlePlay")}
+                                </span>
+                                <span className="absolute -top-2 -right-2 bg-wheelx-yellow text-wheelx-black text-[10px] font-bold px-2 py-0.5 rounded-full">Soon</span>
+                            </div>
                         </div>
 
                         {/* Stats Preview */}
@@ -78,55 +82,19 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Right Content - Phone Mockup */}
+                    {/* Right Content - Phone Mockup with Real Screenshot */}
                     <div className="relative flex justify-center animate-float mt-12 lg:mt-0">
-                        <div className="w-[280px] h-[580px] bg-wheelx-dark rounded-[50px] border-8 border-gray-800 relative overflow-hidden shadow-2xl shadow-black/50">
+                        <div className="w-[280px] h-[580px] bg-wheelx-dark rounded-[50px] border-[6px] border-gray-800 relative overflow-hidden shadow-2xl shadow-black/50">
+                            {/* Notch */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[28px] bg-gray-800 rounded-b-[20px] z-20"></div>
-                            <div className="absolute inset-[8px_8px] rounded-[40px] overflow-hidden bg-gradient-to-b from-gray-800 to-black flex flex-col">
-                                {/* App Content Placeholder */}
-                                <div className="flex-1 flex flex-col pt-10">
-                                    {/* Status Bar */}
-                                    <div className="flex justify-between items-center px-6 mb-4">
-                                        <span className="text-xs text-white font-medium">9:41</span>
-                                        <div className="flex gap-1">
-                                            <div className="w-4 h-2 bg-white/60 rounded-sm"></div>
-                                            <div className="w-4 h-2 bg-white/60 rounded-sm"></div>
-                                            <div className="w-6 h-3 bg-green-500 rounded-sm"></div>
-                                        </div>
-                                    </div>
-
-                                    {/* Header */}
-                                    <div className="px-5 mb-6">
-                                        <h3 className="text-white text-lg font-bold">{t("mockup.greeting")}</h3>
-                                        <p className="text-gray-400 text-sm">{t("mockup.ready")}</p>
-                                    </div>
-
-                                    {/* Map Card */}
-                                    <div className="flex-1 mx-4 mb-4 rounded-2xl bg-gray-800 relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1562920616-e69c0d38865f?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50"></div>
-                                        <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md p-3 rounded-xl flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-wheelx-yellow rounded-lg flex items-center justify-center text-black">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p className="text-white font-bold text-sm">{t("mockup.rideName")}</p>
-                                                <p className="text-xs text-gray-400">{t("mockup.ridersWaiting")}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Nav */}
-                                    <div className="h-16 bg-black border-t border-white/10 flex items-center justify-around px-2">
-                                        {["🏠", "🗺️", "➕", "👥", "👤"].map((icon, i) => (
-                                            <div key={i} className={`w-10 h-10 rounded-xl flex items-center justify-center ${i === 0 ? "bg-wheelx-yellow/20" : ""}`}>
-                                                <span className="text-lg grayscale text-white">{icon}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                            {/* Real App Screenshot */}
+                            <Image
+                                width={280}
+                                height={580}
+                                src="/images/home_app_screenshot.png"
+                                alt="WheelX App Home Screen"
+                                className="absolute inset-0 w-full h-full object-cover rounded-[44px]"
+                            />
                         </div>
 
                         {/* Floating Cards */}

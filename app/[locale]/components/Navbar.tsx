@@ -32,9 +32,10 @@ export default function Navbar({ isScrolled }: { isScrolled: boolean }) {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
-                    <a href="#features" className="text-gray-400 hover:text-white transition-colors">{t("features")}</a>
-                    <a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors">{t("howItWorks")}</a>
-                    <a href="#faq" className="text-gray-400 hover:text-white transition-colors">{t("faq")}</a>
+                    <a href="/#features" className="text-gray-400 hover:text-white transition-colors">{t("features")}</a>
+                    <a href="/#how-it-works" className="text-gray-400 hover:text-white transition-colors">{t("howItWorks")}</a>
+                    <a href="/#faq" className="text-gray-400 hover:text-white transition-colors">{t("faq")}</a>
+                    <a href="/partners" className="text-gray-400 hover:text-white transition-colors">{t("partners")}</a>
 
                     <div className="flex items-center gap-4 ml-4">
                         <LanguageSwitcher />
@@ -61,10 +62,11 @@ export default function Navbar({ isScrolled }: { isScrolled: boolean }) {
                             <span className="text-gray-400 text-sm">Language</span>
                             <LanguageSwitcher />
                         </div>
-                        <a href="#features" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("features")}</a>
-                        <a href="#how-it-works" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("howItWorks")}</a>
-                        <a href="#faq" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("faq")}</a>
-                        <a href="#download" className="bg-wheelx-yellow text-wheelx-black font-bold py-3 text-center rounded-xl mt-2" onClick={() => setMobileMenuOpen(false)}>
+                        <a href="/#features" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("features")}</a>
+                        <a href="/#how-it-works" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("howItWorks")}</a>
+                        <a href="/#faq" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("faq")}</a>
+                        <a href="/partners" className="text-white text-lg" onClick={() => setMobileMenuOpen(false)}>{t("partners")}</a>
+                        <a href="https://apps.apple.com/app/wheelxi/id6757822107" className="bg-wheelx-yellow text-wheelx-black font-bold py-3 text-center rounded-xl mt-2" onClick={() => setMobileMenuOpen(false)}>
                             {t("download")}
                         </a>
                     </div>

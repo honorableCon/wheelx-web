@@ -100,10 +100,11 @@
         "features": "Caratteristiche",
         "howItWorks": "Come funziona",
         "faq": "FAQ",
+        "partners": "Partner",
         "download": "Scarica"
     },
     "Hero": {
-        "availability": "Prossimamente su iOS e Android",
+        "availability": "Disponibile su App Store",
         "title": "Eleva il tuo",
         "ride": "Viaggio",
         "description": "L'app definitiva per i motociclisti. Navigazione GPS ottimizzata, tracciamento di gruppo in tempo reale, organizzazione di eventi e una comunità globale di rider.",
@@ -140,6 +141,22 @@
                 "title": "Tracciamento in tempo reale",
                 "desc": "Localizza i tuoi amici sulla mappa in tempo reale. Perfetto per i giri di gruppo."
             },
+            "groups": {
+                "title": "Gruppi di Rider",
+                "desc": "Crea o unisciti a gruppi, condividi post, organizza uscite e costruisci la tua comunità motociclistica."
+            },
+            "voiceChat": {
+                "title": "Chat Vocale",
+                "desc": "Parla a mani libere con il tuo gruppo durante il giro tramite push-to-talk. Resta connesso senza fermarti."
+            },
+            "discover": {
+                "title": "Scopri Luoghi",
+                "desc": "Esplora percorsi condivisi, luoghi moto-friendly, stazioni di servizio e punti panoramici vicino a te."
+            },
+            "marketplace": {
+                "title": "Marketplace",
+                "desc": "Compra e vendi equipaggiamento, ricambi e accessori moto direttamente nella comunità."
+            },
             "community": {
                 "title": "Comunità",
                 "desc": "Condividi le tue avventure, unisciti ai gruppi e connettiti con i rider di tutto l'universo."
@@ -151,6 +168,10 @@
             "sos": {
                 "title": "Sicurezza SOS",
                 "desc": "Rilevamento automatico delle cadute, pulsante SOS e avvisi ai tuoi contatti di emergenza."
+            },
+            "garage": {
+                "title": "Il Mio Garage",
+                "desc": "Gestisci più moto, monitora il chilometraggio e mantieni una cronologia completa di ogni moto."
             },
             "maintenance": {
                 "title": "Registro Manutenzione",
@@ -183,6 +204,36 @@
         "km": "Km percorsi",
         "routes": "Percorsi creati",
         "events": "Eventi"
+    },
+    "Partners": {
+        "badge": "Opportunità Business",
+        "title": "Unisciti alla",
+        "titleAccent": "Rete WheelX",
+        "description": "Collabora con noi per raggiungere migliaia di motociclisti appassionati. Fai crescere il tuo business supportando la comunità motociclistica.",
+        "categories": {
+            "stations": {
+                "title": "Stazioni di Servizio",
+                "description": "Offri sconti e ricompense esclusive ai rider WheelX nelle tue stazioni."
+            },
+            "garages": {
+                "title": "Officine e Servizi",
+                "description": "Connettiti con rider che cercano manutenzione, riparazioni e personalizzazione."
+            },
+            "equipment": {
+                "title": "Negozi di Equipaggiamento",
+                "description": "Mostra il tuo equipaggiamento, pezzi e accessori alla nostra comunità attiva di rider."
+            },
+            "insurance": {
+                "title": "Assicurazioni",
+                "description": "Raggiungi rider alla ricerca di una copertura assicurativa moto affidabile e protezione."
+            }
+        },
+        "cta": {
+            "title": "Pronto a diventare partner?",
+            "description": "Contatta il nostro team partnership per discutere opportunità e crescere insieme.",
+            "button": "Contattaci",
+            "learnMore": "Scopri di più"
+        }
     },
     "FAQ": {
         "title": "Domande ",
@@ -289,6 +340,118 @@
             "security": {
                 "title": "3. Sicurezza",
                 "content": "Implementiamo misure di sicurezza standard del settore per proteggere le tue informazioni e garantire che i tuoi dati di viaggio rimangano privati."
+            }
+        }
+    },
+    "PartnersPage": {
+        "meta": {
+            "title": "Partnership con WheelX - Unisciti alla Rete Motociclistica",
+            "description": "Collabora con WheelX per raggiungere migliaia di motociclisti appassionati. Fai crescere il tuo business supportando la comunità motociclistica."
+        },
+        "hero": {
+            "badge": "Partnership Aziendali",
+            "title": "Fai crescere il tuo business con",
+            "titleAccent": "la Rete WheelX",
+            "description": "Connettiti con migliaia di motociclisti appassionati ed espandi la tua portata nella comunità. Il nostro programma partnership aiuta stazioni di servizio, officine, negozi di equipaggiamento e assicurazioni a prosperare.",
+            "ctaPrimary": "Diventa Partner",
+            "ctaSecondary": "Vedi Vantaggi"
+        },
+        "benefits": {
+            "title": "Perché collaborare con WheelX?",
+            "description": "Unisciti a una rete crescente di aziende al servizio della comunità motociclistica",
+            "items": {
+                "visibility": {
+                    "title": "Maggiore Visibilità",
+                    "description": "Fatti scoprire da migliaia di rider attivi in cerca di servizi vicini."
+                },
+                "engagement": {
+                    "title": "Coinvolgimento Diretto",
+                    "description": "Connettiti direttamente con il tuo pubblico target attraverso la nostra piattaforma."
+                },
+                "data": {
+                    "title": "Insights & Analytics",
+                    "description": "Accedi a dati preziosi sul comportamento dei rider nella tua zona."
+                },
+                "support": {
+                    "title": "Supporto Dedicato",
+                    "description": "Il nostro team ti fornisce supporto continuo per massimizzare il successo."
+                },
+                "integration": {
+                    "title": "Integrazione Facile",
+                    "description": "Processo di onboarding semplice con strumenti progettati per il tuo business."
+                },
+                "growth": {
+                    "title": "Crescita Comunitaria",
+                    "description": "Cresci insieme a WheelX e costruisci relazioni durature."
+                }
+            }
+        },
+        "categories": {
+            "title": "Categorie di Partnership",
+            "description": "Scegli il modello adatto al tuo business",
+            "items": {
+                "stations": {
+                    "title": "Stazioni di Servizio",
+                    "description": "Diventa destinazione preferita dei rider con ricompense esclusive.",
+                    "benefits": {
+                        "one": "Posizionamento premium nel ricercatore stazioni",
+                        "two": "Programmi sconto esclusivi per rider",
+                        "three": "Aggiornamenti prezzi in tempo reale"
+                    }
+                },
+                "garages": {
+                    "title": "Officine e Servizi",
+                    "description": "Connettiti con rider che cercano manutenzione, riparazioni e personalizzazione.",
+                    "benefits": {
+                        "one": "Badge officina verificata e annunci premium",
+                        "two": "Integrazione prenotazioni e appuntamenti",
+                        "three": "Sistema recensioni e valutazioni"
+                    }
+                },
+                "equipment": {
+                    "title": "Negozi di Equipaggiamento",
+                    "description": "Promuovi equipaggiamento, pezzi e accessori a rider impegnati.",
+                    "benefits": {
+                        "one": "Catalogo integrato nel marketplace",
+                        "two": "Promozioni mirate a rider vicini",
+                        "three": "Sincronizzazione inventario"
+                    }
+                },
+                "insurance": {
+                    "title": "Assicurazioni",
+                    "description": "Raggiungi rider quando hanno più bisogno di copertura con piani su misura.",
+                    "benefits": {
+                        "one": "Annunci premium nel comparatore",
+                        "two": "Integrazione richiesta preventivo",
+                        "three": "Calcolatore premi e strumenti"
+                    }
+                }
+            }
+        },
+        "contact": {
+            "title": "Pronto per Iniziare?",
+            "description": "Contatta il nostro team partnership per discutere opportunità.",
+            "email": {
+                "label": "Email Partnership"
+            },
+            "response": {
+                "label": "Tempo di Risposta",
+                "time": "Entro 24-48 ore"
+            },
+            "button": "Contatta Team Partnership",
+            "form": {
+                "name": "Nome completo",
+                "email": "Indirizzo email",
+                "company": "Nome azienda",
+                "category": "Categoria partnership",
+                "selectCategory": "Seleziona una categoria...",
+                "message": "Messaggio",
+                "submit": "Invia richiesta",
+                "sending": "Invio..."
+            },
+            "success": {
+                "title": "Grazie!",
+                "message": "Abbiamo ricevuto la tua richiesta di partnership e ti risponderemo entro 24-48 ore."
             }
         }
     }

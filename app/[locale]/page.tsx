@@ -1,6 +1,7 @@
 import NavbarWrapper from "./components/NavbarWrapper";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
+import Partners from "./components/Partners";
 import HowItWorks from "./components/HowItWorks";
 import Stats from "./components/Stats";
 import FAQ from "./components/FAQ";
@@ -13,7 +14,7 @@ import { getTranslations } from "next-intl/server";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
-  
+
   return {
     title: t("title"),
     description: t("description"),
@@ -63,6 +64,7 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <Stats />
+      <Partners />
       <FAQ />
       <DownloadCTA />
       <Footer />

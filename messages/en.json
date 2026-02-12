@@ -100,10 +100,11 @@
         "features": "Features",
         "howItWorks": "How it works",
         "faq": "FAQ",
+        "partners": "Partners",
         "download": "Download"
     },
     "Hero": {
-        "availability": "Coming soon on iOS & Android",
+        "availability": "Available on App Store",
         "title": "Elevate Your",
         "ride": "Ride",
         "description": "The ultimate app for bikers. Optimized GPS navigation, real-time group tracking, event organization, and a global community of riders.",
@@ -140,6 +141,22 @@
                 "title": "Real-time Tracking",
                 "desc": "Locate your friends on the map in real-time. Perfect for group rides."
             },
+            "groups": {
+                "title": "Rider Groups",
+                "desc": "Create or join riding groups, share posts, organize group rides and build your biker community."
+            },
+            "voiceChat": {
+                "title": "Voice Chat",
+                "desc": "Talk hands-free with your group during rides using push-to-talk. Stay connected without stopping."
+            },
+            "discover": {
+                "title": "Discover Places",
+                "desc": "Explore community-shared routes, biker-friendly spots, gas stations, and scenic viewpoints near you."
+            },
+            "marketplace": {
+                "title": "Marketplace",
+                "desc": "Buy and sell motorcycle gear, parts and accessories directly within the community."
+            },
             "community": {
                 "title": "Community",
                 "desc": "Share your adventures, join groups and connect with riders from all over the world."
@@ -151,6 +168,10 @@
             "sos": {
                 "title": "SOS Safety",
                 "desc": "Automatic fall detection, SOS button and alerts to your emergency contacts."
+            },
+            "garage": {
+                "title": "My Garage",
+                "desc": "Manage multiple motorcycles, track mileage and keep a complete history of each bike."
             },
             "maintenance": {
                 "title": "Maintenance Log",
@@ -183,6 +204,36 @@
         "km": "Km travelled",
         "routes": "Routes created",
         "events": "Events"
+    },
+    "Partners": {
+        "badge": "Business Opportunities",
+        "title": "Join the",
+        "titleAccent": "WheelX Network",
+        "description": "Partner with us to reach thousands of passionate riders. Grow your business while supporting the motorcycle community.",
+        "categories": {
+            "stations": {
+                "title": "Gas Stations",
+                "description": "Offer exclusive discounts and rewards to WheelX riders at your stations."
+            },
+            "garages": {
+                "title": "Garages & Services",
+                "description": "Connect with riders who need maintenance, repairs, and customization services."
+            },
+            "equipment": {
+                "title": "Equipment Shops",
+                "description": "Showcase your gear, parts, and accessories to our active rider community."
+            },
+            "insurance": {
+                "title": "Insurance Providers",
+                "description": "Reach riders looking for reliable motorcycle insurance coverage and protection."
+            }
+        },
+        "cta": {
+            "title": "Ready to become a partner?",
+            "description": "Contact our partnership team to discuss opportunities and how we can grow together.",
+            "button": "Contact Us",
+            "learnMore": "Learn More"
+        }
     },
     "FAQ": {
         "title": "Frequently Asked ",
@@ -289,6 +340,118 @@
             "security": {
                 "title": "3. Security",
                 "content": "We implement industry-standard security measures to protect your information and ensure your ride data remains private."
+            }
+        }
+    },
+    "PartnersPage": {
+        "meta": {
+            "title": "Partner with WheelX - Join the Motorcycle Network",
+            "description": "Partner with WheelX to reach thousands of passionate riders. Grow your business while supporting the motorcycle community."
+        },
+        "hero": {
+            "badge": "Business Partnerships",
+            "title": "Grow Your Business with",
+            "titleAccent": "WheelX Network",
+            "description": "Connect with thousands of passionate riders and expand your reach in the motorcycle community. Our partnership program helps fuel stations, garages, equipment shops, and insurance providers thrive.",
+            "ctaPrimary": "Become a Partner",
+            "ctaSecondary": "See Benefits"
+        },
+        "benefits": {
+            "title": "Why Partner with WheelX?",
+            "description": "Join a growing network of businesses serving the motorcycle community",
+            "items": {
+                "visibility": {
+                    "title": "Increased Visibility",
+                    "description": "Get discovered by thousands of active riders searching for services near them."
+                },
+                "engagement": {
+                    "title": "Direct Engagement",
+                    "description": "Connect directly with your target audience through our platform and featured listings."
+                },
+                "data": {
+                    "title": "Insights & Analytics",
+                    "description": "Access valuable data about rider behavior and preferences in your area."
+                },
+                "support": {
+                    "title": "Dedicated Support",
+                    "description": "Our partnership team provides ongoing support to maximize your success."
+                },
+                "integration": {
+                    "title": "Easy Integration",
+                    "description": "Simple onboarding process with tools designed for your business type."
+                },
+                "growth": {
+                    "title": "Community Growth",
+                    "description": "Grow alongside the WheelX community and build lasting customer relationships."
+                }
+            }
+        },
+        "categories": {
+            "title": "Partnership Categories",
+            "description": "Choose the partnership model that fits your business",
+            "items": {
+                "stations": {
+                    "title": "Gas Stations",
+                    "description": "Partner with WheelX to become a preferred fuel destination for riders. Offer exclusive rewards and get featured in our station locator.",
+                    "benefits": {
+                        "one": "Featured placement in our gas station finder",
+                        "two": "Exclusive rider discount programs",
+                        "three": "Real-time pricing and amenity updates"
+                    }
+                },
+                "garages": {
+                    "title": "Garages & Services",
+                    "description": "Connect with riders who need maintenance, repairs, and customization. Showcase your expertise and build trusted relationships.",
+                    "benefits": {
+                        "one": "Verified garage badge and featured listings",
+                        "two": "Direct booking and appointment integration",
+                        "three": "Customer reviews and rating system"
+                    }
+                },
+                "equipment": {
+                    "title": "Equipment Shops",
+                    "description": "Promote your gear, parts, and accessories to an engaged community of riders actively looking for quality equipment.",
+                    "benefits": {
+                        "one": "Product catalog integration in marketplace",
+                        "two": "Targeted promotions to nearby riders",
+                        "three": "Inventory sync and order management"
+                    }
+                },
+                "insurance": {
+                    "title": "Insurance Providers",
+                    "description": "Reach riders when they need coverage most. Offer tailored motorcycle insurance plans with easy comparison tools.",
+                    "benefits": {
+                        "one": "Featured insurance comparison listings",
+                        "two": "Direct quote request integration",
+                        "three": "Premium calculator and coverage tools"
+                    }
+                }
+            }
+        },
+        "contact": {
+            "title": "Ready to Get Started?",
+            "description": "Contact our partnership team to discuss opportunities and how we can grow together.",
+            "email": {
+                "label": "Partnership Email"
+            },
+            "response": {
+                "label": "Response Time",
+                "time": "Within 24-48 hours"
+            },
+            "button": "Contact Partnership Team",
+            "form": {
+                "name": "Full Name",
+                "email": "Email Address",
+                "company": "Company Name",
+                "category": "Partnership Category",
+                "selectCategory": "Select a category...",
+                "message": "Message",
+                "submit": "Send Inquiry",
+                "sending": "Sending..."
+            },
+            "success": {
+                "title": "Thank You!",
+                "message": "We've received your partnership inquiry and will get back to you within 24-48 hours."
             }
         }
     }

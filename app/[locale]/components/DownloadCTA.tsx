@@ -32,14 +32,17 @@ export default function DownloadCTA() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-bold text-lg px-8 py-4 rounded-full shadow-xl shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                    <a href="https://apps.apple.com/app/wheelxi/id6757822107" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-br from-wheelx-yellow to-wheelx-yellow-dark text-wheelx-black font-bold text-lg px-8 py-4 rounded-full shadow-xl shadow-wheelx-yellow/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
                         <AppleIcon />
                         {t("appStore")}
                     </a>
-                    <a href="#" className="bg-transparent border-2 border-wheelx-metal text-white font-bold text-lg px-8 py-4 rounded-full hover:border-wheelx-yellow hover:text-wheelx-yellow hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
-                        <PlayStoreIcon />
-                        {t("googlePlay")}
-                    </a>
+                    <div className="relative">
+                        <span className="bg-transparent border-2 border-wheelx-gray text-wheelx-metal font-bold text-lg px-8 py-4 rounded-full flex items-center justify-center gap-3 cursor-not-allowed opacity-50">
+                            <PlayStoreIcon />
+                            {t("googlePlay")}
+                        </span>
+                        <span className="absolute -top-2 -right-2 bg-wheelx-yellow text-wheelx-black text-[10px] font-bold px-2 py-0.5 rounded-full">Soon</span>
+                    </div>
                 </div>
             </div>
         </section>
