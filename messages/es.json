@@ -16,9 +16,10 @@
             "routes": "Rutas",
             "activeRides": "Rutas activas",
             "rideHistory": "Historial",
-            "garajes": "Garajes",
+            "garages": "Garajes",
             "reports": "Reportes",
             "notifications": "Notificaciones",
+            "countries": "Países",
             "backToWebsite": "Volver al sitio",
             "signOut": "Cerrar sesión"
         },

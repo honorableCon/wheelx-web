@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { fetchCurrentUser } from "./api";
 
 // Map country names to ISO 3166-1 alpha-2 codes
-const countryNameToCode: Record<string, string> = {
+export const countryNameToCode: Record<string, string> = {
   'senegal': 'SN',
   'france': 'FR',
   'italy': 'IT',
@@ -29,10 +29,10 @@ const countryNameToCode: Record<string, string> = {
 
 function normalizeCountryCode(country: string): string {
   if (!country) return '';
-  
+
   // Already a 2-letter code
   if (country.length === 2) return country.toUpperCase();
-  
+
   // Convert full name to code
   const normalized = country.toLowerCase().trim();
   return countryNameToCode[normalized] || country.toUpperCase();

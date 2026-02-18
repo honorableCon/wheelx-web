@@ -72,12 +72,12 @@ async function handleResponse(res: Response) {
         console.error(`API Error [${res.status}]:`, errorText);
         throw new Error(`API Error: ${res.statusText}`);
     }
-    
+
     const contentType = res.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
         throw new Error('Invalid response type');
     }
-    
+
     const json = await res.json();
     // Handle nested data structures: { data: { data: [...] } } or { data: [...] } or direct array
     if (json.data !== undefined) {
@@ -260,6 +260,23 @@ export async function sendBroadcastNotification(title: string, message: string) 
     }
 }
 
+export async function sendCountryBroadcastNotification(countryCodes: string | string[], title: string, message: string) {
+    try {
+        const res = await fetch(`${API_URL}/notifications/broadcast-country`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...buildHeaders(),
+            },
+            body: JSON.stringify({ countryCodes, title, message })
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to broadcast notification to country", error);
+        return false;
+    }
+}
+
 // Admin Actions
 export async function banUser(id: string) {
     try {
@@ -346,6 +363,35 @@ export async function fetchCountries() {
     }
 }
 
+export async function fetchCountryConfigs() {
+    try {
+        const res = await fetch(`${API_URL}/countries/config`, {
+            headers: buildHeaders(),
+        });
+        return await handleResponse(res);
+    } catch (e) {
+        console.error("Failed to fetch country configs", e);
+        return [];
+    }
+}
+
+export async function updateCountryFeatures(code: string, features: Record<string, boolean>) {
+    try {
+        const res = await fetch(`${API_URL}/countries/${code}/features`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                ...buildHeaders(),
+            },
+            body: JSON.stringify(features),
+        });
+        return res.ok;
+    } catch (e) {
+        console.error("Failed to update country features", e);
+        return false;
+    }
+}
+
 export async function fetchCurrentUser() {
     try {
         const res = await fetch(`${API_URL}/users/me`, {
@@ -380,6 +426,87 @@ export async function deleteRoute(id: string) {
         return res.ok;
     } catch (error) {
         console.error("Failed to delete route", error);
+        return false;
+    }
+}
+
+// Insurance Requests
+export async function fetchInsuranceRequests(page = 1, limit = 10, status = "", country = "") {
+    try {
+        const query = `page=${page}&limit=${limit}${status ? `&status=${status}` : ''}${country ? `&country=${country}` : ''}`;
+        const res = await fetch(`${API_URL}/insurance-requests/admin/list?${query}`, {
+            headers: buildHeaders(country),
+        });
+        return await handleResponse(res);
+    } catch (error) {
+        console.error("Failed to fetch insurance requests", error);
+        return { data: [], meta: { total: 0 } };
+    }
+}
+
+export async function markInsuranceRequestAsProcessing(id: string) {
+    try {
+        const res = await fetch(`${API_URL}/insurance-requests/${id}/process`, {
+            method: 'PATCH',
+            headers: buildHeaders(),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to mark as processing", error);
+        return false;
+    }
+}
+
+export async function approveInsuranceRequest(id: string, data: {
+    provider: string;
+    policyNumber: string;
+    actualStartDate: string;
+    expirationDate: string;
+    documents?: string[];
+    adminNotes?: string;
+}) {
+    try {
+        const res = await fetch(`${API_URL}/insurance-requests/${id}/approve`, {
+            method: 'PATCH',
+            headers: {
+                ...buildHeaders(),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to approve request", error);
+        return false;
+    }
+}
+
+export async function rejectInsuranceRequest(id: string, rejectionReason: string) {
+    try {
+        const res = await fetch(`${API_URL}/insurance-requests/${id}/reject`, {
+            method: 'PATCH',
+            headers: {
+                ...buildHeaders(),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ rejectionReason }),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to reject request", error);
+        return false;
+    }
+}
+
+export async function activateInsurance(id: string) {
+    try {
+        const res = await fetch(`${API_URL}/insurance-requests/${id}/activate`, {
+            method: 'PATCH',
+            headers: buildHeaders(),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error("Failed to activate insurance", error);
         return false;
     }
 }

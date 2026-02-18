@@ -2,13 +2,21 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { sendBroadcastNotification } from "../lib/api";
+import { sendBroadcastNotification, sendCountryBroadcastNotification } from "../lib/api";
+import { countryNameToCode } from "../lib/useCountryFilter";
 
 export default function NotificationsPage() {
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
+    const [selectedCountry, setSelectedCountry] = useState("");
     const [sending, setSending] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    // Generate country options from the map, sorted alphabetically
+    const countryOptions = Object.entries(countryNameToCode).map(([name, code]) => ({
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        code
+    })).sort((a, b) => a.name.localeCompare(b.name));
 
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,12 +25,18 @@ export default function NotificationsPage() {
         setSending(true);
         setStatus('idle');
 
-        const success = await sendBroadcastNotification(title, message);
+        let success = false;
+        if (selectedCountry) {
+            success = await sendCountryBroadcastNotification(selectedCountry, title, message);
+        } else {
+            success = await sendBroadcastNotification(title, message);
+        }
 
         if (success) {
             setStatus('success');
             setTitle("");
             setMessage("");
+            setSelectedCountry(""); // Reset country selection
             setTimeout(() => setStatus('idle'), 3000);
         } else {
             setStatus('error');
@@ -42,6 +56,27 @@ export default function NotificationsPage() {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h2 className="font-semibold text-lg mb-4">Compose Broadcast</h2>
                     <form onSubmit={handleSend} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Target Audience</label>
+                            <select
+                                value={selectedCountry}
+                                onChange={e => setSelectedCountry(e.target.value)}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400/50 bg-white"
+                            >
+                                <option value="">All Users (Global)</option>
+                                {countryOptions.map((country) => (
+                                    <option key={country.code} value={country.code}>
+                                        {country.name} ({country.code})
+                                    </option>
+                                ))}
+                            </select>
+                            <p className="text-xs text-slate-500 mt-1">
+                                {selectedCountry
+                                    ? `Sending to users in ${countryOptions.find(c => c.code === selectedCountry)?.name}`
+                                    : "Sending to everyone regardless of location"}
+                            </p>
+                        </div>
+
                         <div>
                             <label className="block text-sm font-medium text-slate-700 mb-1">Title</label>
                             <input
@@ -77,7 +112,7 @@ export default function NotificationsPage() {
                         )}
 
                         <Button type="submit" className="w-full" disabled={sending}>
-                            {sending ? 'Sending...' : 'Broadcast to All Users'}
+                            {sending ? 'Sending...' : (selectedCountry ? 'Broadcast to Country' : 'Broadcast to All Users')}
                         </Button>
                     </form>
                 </div>
@@ -102,6 +137,11 @@ export default function NotificationsPage() {
                     <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 text-sm text-blue-800">
                         <p className="font-medium mb-1">💡 Pro Tip</p>
                         <p>Broadcasts take a few minutes to reach all users. Use this for important announcements, app updates, or community alerts.</p>
+                        {selectedCountry && (
+                            <p className="mt-2 text-blue-900 font-semibold">
+                                🌍 Target: {countryOptions.find(c => c.code === selectedCountry)?.name}
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>

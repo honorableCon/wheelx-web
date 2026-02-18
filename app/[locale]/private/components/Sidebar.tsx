@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Map, Wrench, FileText, ArrowLeft, MessageSquare, Tent, Calendar, Bell, Activity, Route, X } from "lucide-react";
+import { LayoutDashboard, Users, Map, Wrench, FileText, ArrowLeft, MessageSquare, Tent, Calendar, Bell, Activity, Route, X, Globe } from "lucide-react";
 
 const menuItems = [
     { key: "dashboard", href: "/private/dashboard", icon: LayoutDashboard },
@@ -14,9 +14,11 @@ const menuItems = [
     { key: "routes", href: "/private/routes", icon: Route },
     { key: "activeRides", href: "/private/active-rides", icon: Activity },
     { key: "rideHistory", href: "/private/rides", icon: Map },
+    { key: "insuranceRequests", href: "/private/insurance-requests", icon: FileText },
     { key: "garages", href: "/private/garages", icon: Wrench },
     { key: "reports", href: "/private/reports", icon: FileText },
     { key: "notifications", href: "/private/notifications", icon: Bell },
+    { key: "countries", href: "/private/countries", icon: Globe },
 ];
 
 interface SidebarProps {

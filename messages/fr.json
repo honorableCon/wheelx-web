@@ -18,7 +18,9 @@
             "rideHistory": "Historique",
             "garages": "Garages",
             "reports": "Signalements",
-            "notifications": "Notificati",
+            "notifications": "Notifications",
+            "insuranceRequests": "Demandes d'assurance",
+            "countries": "Pays",
             "backToWebsite": "Retour au site",
             "signOut": "Déconnexion"
         },
