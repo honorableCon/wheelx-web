@@ -13,8 +13,8 @@ export default function FAQ() {
     const t = useTranslations("FAQ");
 
     // We can't easily map over a JSON array in next-intl without getMessages or similar
-    // For simplicity, I'll use a fixed length since I know there are 5 FAQs
-    const faqIndices = [0, 1, 2, 3, 4];
+    // For simplicity, I'll use a fixed length since I know there are 9 FAQs
+    const faqIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     return (
         <section id="faq" className="py-24 bg-wheelx-black">

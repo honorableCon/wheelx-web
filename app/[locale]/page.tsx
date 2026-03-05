@@ -1,8 +1,10 @@
 import NavbarWrapper from "./components/NavbarWrapper";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
+import Gamification from "./components/Gamification";
 import Partners from "./components/Partners";
 import HowItWorks from "./components/HowItWorks";
+import Referral from "./components/Referral";
 import Stats from "./components/Stats";
 import FAQ from "./components/FAQ";
 import DownloadCTA from "./components/DownloadCTA";
@@ -62,8 +64,10 @@ export default function Home() {
       <NavbarWrapper />
       <Hero />
       <Features />
+      <Gamification />
       <HowItWorks />
       <Stats />
+      <Referral />
       <Partners />
       <FAQ />
       <DownloadCTA />

@@ -20,6 +20,19 @@ const ChevronDownIcon = () => (
     </svg>
 );
 
+const MapPinIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-6 h-6 text-green-300">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+    </svg>
+);
+
+const ShieldCheckIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-6 h-6 text-red-300">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m6 2.25c0 5.523-4.477 10-10 10S1 17.523 1 12 5.477 2 11 2s10 4.477 10 10z" />
+    </svg>
+);
+
 export default function Hero() {
     const t = useTranslations("Hero");
 
@@ -101,7 +114,7 @@ export default function Hero() {
                         <div className="absolute -left-8 top-1/4 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 animate-slide-up hidden lg:block shadow-xl" style={{ animationDelay: "0.3s" }}>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
-                                    📍
+                                    <MapPinIcon />
                                 </div>
                                 <div>
                                     <p className="text-white font-semibold">{t("mockup.liveTracking")}</p>
@@ -113,7 +126,7 @@ export default function Hero() {
                         <div className="absolute -right-4 bottom-1/3 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 animate-slide-up hidden lg:block shadow-xl" style={{ animationDelay: "0.5s" }}>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl">
-                                    🛡️
+                                    <ShieldCheckIcon />
                                 </div>
                                 <div>
                                     <p className="text-white font-semibold">{t("mockup.sosActive")}</p>

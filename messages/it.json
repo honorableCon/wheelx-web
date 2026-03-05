@@ -177,8 +177,63 @@
             "maintenance": {
                 "title": "Registro Manutenzione",
                 "desc": "Gestisci la manutenzione della tua moto: olio, pneumatici, freni. Promemoria automatici inclusi."
+            },
+            "crashDetection": {
+                "title": "Rilevamento Caduta",
+                "desc": "I sensori del telefono rilevano automaticamente una caduta. Un conto alla rovescia ti dà tempo per annullare l'alerta prima che vengano avvisati i tuoi contatti di emergenza."
+            },
+            "weather": {
+                "title": "Meteo & Sicurezza Stradale",
+                "desc": "Previsioni meteo in tempo reale adattate ai motociclisti. Avvisi per condizioni pericolose (temporale, ghiaccio, vento forte) prima e durante il giro."
+            },
+            "hazard": {
+                "title": "Zone Pericolose",
+                "desc": "Segnala e ricevi avvisi in tempo reale sui pericoli stradali: buche, incidenti, lavori, fondo scivoloso — segnalati dalla comunità."
+            },
+            "messages": {
+                "title": "Messaggi Diretti",
+                "desc": "Chatta privatamente con qualsiasi rider della comunità. Pianifica giri, condividi percorsi, organizza raduni."
+            },
+            "challenges": {
+                "title": "Sfide & Duelli",
+                "desc": "Accetta sfide attive, sfida altri rider in duelli 1v1, scala la classifica e guadagna premi esclusivi."
+            },
+            "gamification": {
+                "title": "XP, Livelli & Badge",
+                "desc": "Ogni chilometro, uscita e interazione ti dà XP. Sali di livello, sblocca badge esclusivi e tieni traccia delle tue serie settimanali."
             }
         }
+    },
+    "Gamification": {
+        "badge": "Guadagna & Gareggia",
+        "title": "Guida di più, ",
+        "titleAccent": "guadagna di più",
+        "description": "WheelX premia ogni chilometro che percorri. Sblocca badge, sali di livello, batti i tuoi amici nei duelli e tieni traccia delle tue serie settimanali.",
+        "xp": { "title": "XP & Livelli", "desc": "Guadagna esperienza per ogni giro, distanza percorsa e interazione nella comunità. Sali di livello per sbloccare nuovi privilegi." },
+        "badges": { "title": "Badge & Obiettivi", "desc": "Decine di badge unici da sbloccare: primi 100 km, rider notturno, road tripper, capo gruppo e molti altri." },
+        "challenges": { "title": "Sfide", "desc": "Sfide settimanali e mensili adattate al tuo livello. Completale per guadagnare XP bonus e premi esclusivi." },
+        "duels": { "title": "Duelli tra Rider", "desc": "Sfida un altro rider 1v1: più km, giro più lungo, più sessioni in una settimana. Il vincitore si prende la gloria." },
+        "streaks": { "title": "Serie di Giri", "desc": "Costruisci la tua serie settimanale e cerca di battere il tuo record personale. La costanza è premiata." },
+        "leaderboard": { "title": "Classifica", "desc": "Vedi dove ti collochi nella comunità globale e locale. Sfida i rider intorno a te." }
+    },
+    "Referral": {
+        "badge": "Premi Gratuiti",
+        "title": "Invita rider, ",
+        "titleAccent": "guadagnate insieme",
+        "description": "Condividi WheelX con il tuo gruppo e sblocca premi reali — inclusi mesi di assicurazione gratuiti — per ogni rider che porti.",
+        "howTitle": "Come funziona",
+        "steps": {
+            "step1": { "title": "Ottieni il tuo codice", "desc": "Un codice referral unico viene generato automaticamente nell'app." },
+            "step2": { "title": "Invita i rider", "desc": "Condividi il tuo link per messaggio, WhatsApp, Instagram o qualsiasi canale." },
+            "step3": { "title": "Guadagna premi", "desc": "Per ogni rider che si iscrive, guadagni punti riscattabili per mesi di assicurazione gratuiti e vantaggi esclusivi." }
+        },
+        "tiers": {
+            "title": "Premi per Livello",
+            "bronze": { "name": "Bronzo", "desc": "3 referral — 1 mese di assicurazione gratuito" },
+            "silver": { "name": "Argento", "desc": "10 referral — 3 mesi gratuiti + badge esclusivo" },
+            "gold": { "name": "Oro", "desc": "25 referral — 6 mesi gratuiti + stato Oro" }
+        },
+        "cta": "Scarica l'app per ottenere il tuo codice referral"
     },
     "HowItWorks": {
         "title": "Come ",
@@ -204,7 +259,8 @@
         "riders": "Rider attivi",
         "km": "Km percorsi",
         "routes": "Percorsi creati",
-        "events": "Eventi"
+        "events": "Eventi",
+        "badges": "Badge sbloccati"
     },
     "Partners": {
         "badge": "Opportunità Business",
@@ -260,6 +316,22 @@
             {
                 "question": "Come funziona il rilevamento delle cadute?",
                 "answer": "L'app utilizza i sensori del telefono per rilevare le cadute. Un avviso viene inviato automaticamente ai tuoi contatti di emergenza con la tua posizione GPS."
+            },
+            {
+                "question": "Cosa sono le Sfide e i Duelli?",
+                "answer": "Le sfide sono obiettivi settimanali e mensili (distanza, numero di uscite, ecc.) che ti fruttano XP e premi. I duelli ti permettono di sfidare un altro rider 1v1 su una metrica specifica per un periodo definito."
+            },
+            {
+                "question": "WheelX include previsioni meteo?",
+                "answer": "Sì! WheelX mostra il meteo in tempo reale nella schermata principale e ti avvisa delle condizioni pericolose per la guida (temporali, ghiaccio, vento forte) prima e durante il giro."
+            },
+            {
+                "question": "Come funziona il programma referral?",
+                "answer": "Ogni utente WheelX ha un codice referral unico. Quando un amico si iscrive con il tuo codice, guadagni punti verso mesi di assicurazione gratuiti e premi esclusivi. Più rider inviti, più alto è il tuo livello (Bronzo, Argento, Oro)."
+            },
+            {
+                "question": "Cos'è il Medical ID e perché è importante?",
+                "answer": "Il Medical ID ti permette di memorizzare informazioni sanitarie critiche (gruppo sanguigno, allergie, farmaci) nell'app. In caso di incidente, i soccorritori possono accedere a questi dati immediatamente, anche senza sbloccare il telefono."
             }
         ]
     },

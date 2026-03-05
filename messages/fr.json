@@ -178,8 +178,90 @@
             "maintenance": {
                 "title": "Carnet d'Entretien",
                 "desc": "Gérez l'entretien de vos motos : vidange, pneus, freins. Rappels automatiques inclus."
+            },
+            "crashDetection": {
+                "title": "Détection de Chute",
+                "desc": "Les capteurs de votre téléphone détectent automatiquement une chute. Un compte à rebours vous laisse le temps d'annuler l'alerte avant que vos contacts d'urgence soient prévenus."
+            },
+            "weather": {
+                "title": "Météo & Sécurité Routière",
+                "desc": "Prévisions météo en direct adaptées aux motards. Alertes conditions dangereuses (orage, verglas, grand vent) avant et pendant votre balade."
+            },
+            "hazard": {
+                "title": "Zones de Danger",
+                "desc": "Signalez et recevez des alertes en temps réel sur les dangers de la route : nids-de-poule, accidents, travaux, chaussée glissante — remontées par la communauté."
+            },
+            "messages": {
+                "title": "Messages Directs",
+                "desc": "Discutez en privé avec n'importe quel rider. Planifiez des balades, partagez des routes, organisez des retrouvailles."
+            },
+            "challenges": {
+                "title": "Challenges & Duels",
+                "desc": "Relevez des challenges actifs, défiez d'autres riders en duel 1v1, grimpez dans le classement et gagnez des récompenses exclusives."
+            },
+            "gamification": {
+                "title": "XP, Niveaux & Badges",
+                "desc": "Chaque kilomètre, sortie et interaction vous rapporte de l'XP. Montez en niveau, déverrouillez des badges exclusifs et suivez vos séries de balades hebdomadaires."
             }
         }
+    },
+    "Gamification": {
+        "badge": "Gagner & Concourir",
+        "title": "Roulez plus, ",
+        "titleAccent": "gagnez plus",
+        "description": "WheelX récompense chaque kilomètre parcouru. Déverrouillez des badges, montez en niveau, battez vos amis en duel et suivez vos séries hebdomadaires.",
+        "xp": {
+            "title": "XP & Niveaux",
+            "desc": "Gagnez de l'expérience pour chaque balade, distance parcourue et interaction communautaire. Montez en niveau pour débloquer de nouveaux privilèges."
+        },
+        "badges": {
+            "title": "Badges & Achievements",
+            "desc": "Des dizaines de badges uniques à débloquer : premier 100 km, rider nocturne, road tripper, chef de groupe et bien d'autres."
+        },
+        "challenges": {
+            "title": "Challenges",
+            "desc": "Challenges hebdomadaires et mensuels adaptés à votre niveau. Complétez-les pour gagner de l'XP bonus et des récompenses exclusives."
+        },
+        "duels": {
+            "title": "Duels de Riders",
+            "desc": "Défiez un autre rider en 1v1 : le plus de km, la plus longue balade, le plus de sessions dans la semaine. Le vainqueur emporte la gloire."
+        },
+        "streaks": {
+            "title": "Séries de Balades",
+            "desc": "Construisez votre série hebdomadaire et essayez de battre votre record personnel. La constance paie."
+        },
+        "leaderboard": {
+            "title": "Classement",
+            "desc": "Voyez où vous vous situez dans la communauté mondiale et locale. Affrontez les riders autour de vous."
+        }
+    },
+    "Referral": {
+        "badge": "Récompenses Gratuites",
+        "title": "Invitez des riders, ",
+        "titleAccent": "gagnez ensemble",
+        "description": "Partagez WheelX avec votre groupe et débloquez de vraies récompenses — dont des mois d'assurance gratuits — pour chaque rider que vous amenez.",
+        "howTitle": "Comment ça marche",
+        "steps": {
+            "step1": {
+                "title": "Obtenez votre code",
+                "desc": "Un code de parrainage unique est généré automatiquement dans l'app."
+            },
+            "step2": {
+                "title": "Invitez des riders",
+                "desc": "Partagez votre lien par message, WhatsApp, Instagram ou n'importe quel canal."
+            },
+            "step3": {
+                "title": "Récoltez les récompenses",
+                "desc": "Pour chaque rider inscrit, vous gagnez des points échangeables contre des mois d'assurance gratuits et des avantages exclusifs."
+            }
+        },
+        "tiers": {
+            "title": "Récompenses par Palier",
+            "bronze": { "name": "Bronze", "desc": "3 filleuls — 1 mois d'assurance gratuit" },
+            "silver": { "name": "Argent", "desc": "10 filleuls — 3 mois gratuits + badge exclusif" },
+            "gold": { "name": "Or", "desc": "25 filleuls — 6 mois gratuits + statut Or" }
+        },
+        "cta": "Téléchargez l'app pour obtenir votre code de parrainage"
     },
     "HowItWorks": {
         "title": "Comment ça ",
@@ -205,7 +287,8 @@
         "riders": "Riders actifs",
         "km": "Km parcourus",
         "routes": "Routes créées",
-        "events": "Événements"
+        "events": "Événements",
+        "badges": "Badges débloqués"
     },
     "Partners": {
         "badge": "Opportunités Business",
@@ -260,8 +343,22 @@
             },
             {
                 "question": "Comment fonctionne la détection de chute ?",
-                "answer": "L'app utilise les capteurs de votre téléphone pour détecter les chutes. Une alerte est envoyée automatiquement à vos contacts d'urgence avec votre position GPS."
-            }
+                "answer": "L'app utilise les capteurs de votre téléphone pour détecter les chutes. Une alerte est envoyée automatiquement à vos contacts d'urgence avec votre position GPS."            },
+            {
+                "question": "Que sont les Challenges et les Duels ?",
+                "answer": "Les challenges sont des objectifs hebdomadaires et mensuels (distance, nombre de sorties, etc.) qui vous rapportent de l'XP et des récompenses. Les duels permettent de défier un autre rider en 1v1 sur un critère précis sur une période donnée."
+            },
+            {
+                "question": "WheelX inclut-il des prévisions météo ?",
+                "answer": "Oui ! WheelX affiche la météo en direct sur votre écran d'accueil et vous alerte sur les conditions dangereuses pour la conduite (orages, verglas, grand vent) avant et pendant votre balade."
+            },
+            {
+                "question": "Comment fonctionne le programme de parrainage ?",
+                "answer": "Chaque utilisateur WheelX dispose d'un code de parrainage unique. Quand un ami s'inscrit avec votre code, vous gagnez des points vers des mois d'assurance gratuits et des récompenses exclusives. Plus vous invitez de riders, plus votre palier monte (Bronze, Argent, Or)."
+            },
+            {
+                "question": "Qu'est-ce que la Carte Médicale et pourquoi est-elle importante ?",
+                "answer": "La Carte Médicale vous permet de stocker des informations de santé critiques (groupe sanguin, allergies, médicaments) dans l'app. En cas d'accident, les secours peuvent accéder à ces données immédiatement, même sans déverrouiller votre téléphone."            }
         ]
     },
     "DownloadCTA": {

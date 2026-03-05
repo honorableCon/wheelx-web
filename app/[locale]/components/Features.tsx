@@ -267,6 +267,137 @@ export default function Features() {
                         </div>
                     </div>
 
+                    {/* ──────────── Row 5: Crash Detection (wide) + Weather ──────────── */}
+
+                    {/* CRASH DETECTION */}
+                    <div className="lg:col-span-7 group relative bg-gradient-to-br from-rose-600/10 via-wheelx-dark to-wheelx-dark border border-rose-600/20 rounded-3xl p-8 lg:p-10 overflow-hidden hover:border-rose-600/40 transition-all duration-500 min-h-[240px]">
+                        <div className="absolute -top-16 -left-16 w-56 h-56 bg-rose-600/10 rounded-full blur-3xl group-hover:bg-rose-600/20 transition-all duration-700"></div>
+                        {/* Countdown decoration */}
+                        <div className="absolute top-8 right-8 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <div className="w-16 h-16 rounded-full border-2 border-rose-500 flex items-center justify-center">
+                                <span className="text-2xl font-black text-rose-400">5</span>
+                            </div>
+                        </div>
+                        <div className="relative z-10">
+                            <div className="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-4">
+                                <span className="w-2 h-2 bg-rose-400 rounded-full animate-pulse"></span>
+                                <span className="text-xs text-rose-300 font-medium uppercase tracking-wider">Safety</span>
+                            </div>
+                            <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">{t("items.crashDetection.title")}</h3>
+                            <p className="text-gray-400 max-w-md text-base leading-relaxed">{t("items.crashDetection.desc")}</p>
+                        </div>
+                    </div>
+
+                    {/* WEATHER */}
+                    <div className="lg:col-span-5 group relative bg-gradient-to-br from-sky-500/10 via-wheelx-dark to-wheelx-dark border border-sky-500/20 rounded-3xl p-8 overflow-hidden hover:border-sky-500/40 transition-all duration-500 min-h-[240px]">
+                        <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-sky-500/10 rounded-full blur-3xl group-hover:bg-sky-500/20 transition-all duration-700"></div>
+                        {/* Weather icon decoration */}
+                        <svg className="absolute top-6 right-6 w-20 h-20 opacity-10 group-hover:opacity-20 transition-opacity" viewBox="0 0 80 80" fill="none">
+                            <circle cx="32" cy="28" r="14" stroke="#38bdf8" strokeWidth="2" />
+                            <path d="M12 52 Q20 44 32 48 Q44 52 56 44 Q64 40 72 48" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                            <line x1="32" y1="6" x2="32" y2="2" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round"/>
+                            <line x1="32" y1="54" x2="32" y2="50" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round"/>
+                            <line x1="10" y1="28" x2="6" y2="28" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round"/>
+                            <line x1="58" y1="28" x2="54" y2="28" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round"/>
+                        </svg>
+                        <div className="relative z-10">
+                            <div className="w-14 h-14 bg-sky-500/15 border border-sky-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-sky-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t("items.weather.title")}</h3>
+                            <p className="text-gray-400 leading-relaxed">{t("items.weather.desc")}</p>
+                        </div>
+                    </div>
+
+                    {/* ──────────── Row 6: Hazard Zones + Messages + Challenges ──────────── */}
+
+                    {/* HAZARD ZONES */}
+                    <div className="lg:col-span-4 group relative bg-wheelx-dark border border-wheelx-gray rounded-3xl p-8 overflow-hidden hover:border-amber-600/40 transition-all duration-500 min-h-[220px]">
+                        <div className="absolute -top-8 -right-8 w-32 h-32 bg-amber-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                        {/* Warning triangle decoration */}
+                        <svg className="absolute bottom-4 right-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity" viewBox="0 0 60 60" fill="none">
+                            <path d="M30 8 L54 50 H6 Z" stroke="#d97706" strokeWidth="2.5" fill="#d97706" fillOpacity="0.15" strokeLinejoin="round"/>
+                            <line x1="30" y1="24" x2="30" y2="38" stroke="#d97706" strokeWidth="3" strokeLinecap="round"/>
+                            <circle cx="30" cy="44" r="2" fill="#d97706"/>
+                        </svg>
+                        <div className="relative z-10">
+                            <div className="w-14 h-14 bg-amber-600/10 border border-amber-600/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-amber-500">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t("items.hazard.title")}</h3>
+                            <p className="text-gray-400 leading-relaxed">{t("items.hazard.desc")}</p>
+                        </div>
+                    </div>
+
+                    {/* DIRECT MESSAGES */}
+                    <div className="lg:col-span-4 group relative bg-wheelx-dark border border-wheelx-gray rounded-3xl p-8 overflow-hidden hover:border-teal-500/40 transition-all duration-500 min-h-[220px]">
+                        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                        {/* Chat bubble decoration */}
+                        <svg className="absolute bottom-4 right-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity" viewBox="0 0 60 60" fill="none">
+                            <rect x="6" y="10" width="40" height="28" rx="6" stroke="#14b8a6" strokeWidth="2" fill="#14b8a6" fillOpacity="0.1"/>
+                            <path d="M12 38 L10 50 L24 42" fill="#14b8a6" fillOpacity="0.3" stroke="#14b8a6" strokeWidth="1.5" strokeLinejoin="round"/>
+                        </svg>
+                        <div className="relative z-10">
+                            <div className="w-14 h-14 bg-teal-500/10 border border-teal-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-teal-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t("items.messages.title")}</h3>
+                            <p className="text-gray-400 leading-relaxed">{t("items.messages.desc")}</p>
+                        </div>
+                    </div>
+
+                    {/* CHALLENGES & DUELS */}
+                    <div className="lg:col-span-4 group relative bg-wheelx-dark border border-wheelx-gray rounded-3xl p-8 overflow-hidden hover:border-fuchsia-500/40 transition-all duration-500 min-h-[220px]">
+                        <div className="absolute -top-8 -right-8 w-32 h-32 bg-fuchsia-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                        {/* Trophy decoration */}
+                        <svg className="absolute bottom-4 right-4 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity" viewBox="0 0 60 60" fill="none">
+                            <path d="M20 8 H40 V28 A10 10 0 0 1 20 28 Z" stroke="#d946ef" strokeWidth="2" fill="#d946ef" fillOpacity="0.1"/>
+                            <path d="M8 14 H20 V24 A6 6 0 0 1 8 24 Z" stroke="#d946ef" strokeWidth="1.5" fill="none"/>
+                            <path d="M40 14 H52 V24 A6 6 0 0 1 40 24 Z" stroke="#d946ef" strokeWidth="1.5" fill="none"/>
+                            <line x1="30" y1="38" x2="30" y2="46" stroke="#d946ef" strokeWidth="2"/>
+                            <line x1="22" y1="46" x2="38" y2="46" stroke="#d946ef" strokeWidth="2.5" strokeLinecap="round"/>
+                        </svg>
+                        <div className="relative z-10">
+                            <div className="w-14 h-14 bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-fuchsia-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t("items.challenges.title")}</h3>
+                            <p className="text-gray-400 leading-relaxed">{t("items.challenges.desc")}</p>
+                        </div>
+                    </div>
+
+                    {/* ──────────── XP & GAMIFICATION — Full width bottom ──────────── */}
+                    <div className="lg:col-span-12 group relative bg-gradient-to-r from-fuchsia-900/20 via-wheelx-dark to-violet-900/20 border border-fuchsia-500/20 rounded-3xl p-8 overflow-hidden hover:border-fuchsia-500/40 transition-all duration-500">
+                        <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/5 via-transparent to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        {/* Stars decoration */}
+                        <div className="absolute top-4 right-8 flex gap-3 opacity-15 group-hover:opacity-30 transition-opacity">
+                            {[20, 28, 16, 24, 20].map((size, i) => (
+                                <svg key={i} style={{ width: size, height: size }} viewBox="0 0 24 24" fill="#d946ef">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            ))}
+                        </div>
+                        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div className="w-14 h-14 bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-fuchsia-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423L16.5 15.75l.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-white mb-2">{t("items.gamification.title")}</h3>
+                                <p className="text-gray-400 leading-relaxed max-w-3xl">{t("items.gamification.desc")}</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

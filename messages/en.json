@@ -178,8 +178,90 @@
             "maintenance": {
                 "title": "Maintenance Log",
                 "desc": "Manage your bike maintenance: oil changes, tires, brakes. Automatic reminders included."
+            },
+            "crashDetection": {
+                "title": "Crash Detection",
+                "desc": "Your phone's sensors automatically detect a fall. A countdown gives you time to cancel the alert before your emergency contacts are notified."
+            },
+            "weather": {
+                "title": "Weather & Road Safety",
+                "desc": "Live weather forecast tailored for riders. Dangerous condition alerts (storm, ice, high winds) displayed before and during your ride."
+            },
+            "hazard": {
+                "title": "Hazard Zones",
+                "desc": "Report and receive real-time alerts for road dangers: potholes, accidents, roadworks, slippery surfaces — reported by the community."
+            },
+            "messages": {
+                "title": "Direct Messages",
+                "desc": "Chat privately with any rider in the community. Plan rides, share routes, coordinate meetups."
+            },
+            "challenges": {
+                "title": "Challenges & Duels",
+                "desc": "Take on active challenges, challenge other riders to head-to-head duels, climb the leaderboard and earn exclusive rewards."
+            },
+            "gamification": {
+                "title": "XP, Levels & Badges",
+                "desc": "Every kilometer, ride and interaction earns you XP. Level up, unlock exclusive badges and track your weekly riding streaks."
             }
         }
+    },
+    "Gamification": {
+        "badge": "Earn & Compete",
+        "title": "Ride more, ",
+        "titleAccent": "earn more",
+        "description": "WheelX rewards every kilometer you ride. Unlock badges, climb levels, beat your friends in duels and track your riding streaks.",
+        "xp": {
+            "title": "XP & Levels",
+            "desc": "Earn experience points for every ride, distance covered and community interaction. Level up to unlock new privileges."
+        },
+        "badges": {
+            "title": "Badges & Achievements",
+            "desc": "Dozens of unique badges to unlock: first 100 km, night rider, road tripper, group leader and many more."
+        },
+        "challenges": {
+            "title": "Challenges",
+            "desc": "Weekly and monthly challenges adapted to your level. Complete them to earn bonus XP and exclusive rewards."
+        },
+        "duels": {
+            "title": "Rider Duels",
+            "desc": "Challenge another rider 1-on-1: most km, longest ride, most sessions in a week. Winner takes the glory."
+        },
+        "streaks": {
+            "title": "Riding Streaks",
+            "desc": "Build your weekly riding streak and try to beat your personal best. Consistency pays off."
+        },
+        "leaderboard": {
+            "title": "Leaderboard",
+            "desc": "See where you rank in the global and local community. Compete with riders around you."
+        }
+    },
+    "Referral": {
+        "badge": "Free Rewards",
+        "title": "Invite riders, ",
+        "titleAccent": "earn together",
+        "description": "Share WheelX with your riding crew and unlock real rewards — including free insurance months — for every rider you bring in.",
+        "howTitle": "How it works",
+        "steps": {
+            "step1": {
+                "title": "Get your code",
+                "desc": "A unique referral code is generated for you automatically in the app."
+            },
+            "step2": {
+                "title": "Invite riders",
+                "desc": "Share your link by message, WhatsApp, Instagram or any channel."
+            },
+            "step3": {
+                "title": "Earn rewards",
+                "desc": "For each rider who joins, you earn points redeemable for free insurance months and exclusive perks."
+            }
+        },
+        "tiers": {
+            "title": "Tier Rewards",
+            "bronze": { "name": "Bronze", "desc": "3 referrals — 1 free insurance month" },
+            "silver": { "name": "Silver", "desc": "10 referrals — 3 free months + exclusive badge" },
+            "gold": { "name": "Gold", "desc": "25 referrals — 6 free months + Gold status" }
+        },
+        "cta": "Download the app to get your referral code"
     },
     "HowItWorks": {
         "title": "How it ",
@@ -205,7 +287,8 @@
         "riders": "Active Riders",
         "km": "Km travelled",
         "routes": "Routes created",
-        "events": "Events"
+        "events": "Events",
+        "badges": "Badges unlocked"
     },
     "Partners": {
         "badge": "Business Opportunities",
@@ -261,6 +344,22 @@
             {
                 "question": "How does fall detection work?",
                 "answer": "The app uses your phone's sensors to detect falls. An alert is automatically sent to your emergency contacts with your GPS position."
+            },
+            {
+                "question": "What are Challenges and Duels?",
+                "answer": "Challenges are weekly and monthly objectives (distance, number of rides, etc.) that earn you XP and rewards. Duels let you challenge another rider 1-on-1 on a specific metric over a set period."
+            },
+            {
+                "question": "Does WheelX include weather forecasts?",
+                "answer": "Yes! WheelX shows live weather on your home screen and alerts you to dangerous riding conditions (storms, ice, high winds) before and during your ride."
+            },
+            {
+                "question": "How does the referral program work?",
+                "answer": "Every WheelX user gets a unique referral code. When a friend joins using your code, you earn points towards free insurance months and exclusive rewards. The more riders you invite, the higher your tier (Bronze, Silver, Gold)."
+            },
+            {
+                "question": "What is Medical ID and why is it important?",
+                "answer": "Medical ID lets you store critical health information (blood type, allergies, medications) in the app. In case of an accident, emergency responders can access this data immediately, even without unlocking your phone."
             }
         ]
     },
