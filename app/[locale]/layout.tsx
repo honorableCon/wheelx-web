@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales } from '@/navigation';
+import { Analytics } from '@vercel/analytics/next'
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -103,6 +104,7 @@ export default async function RootLayout({
           <JsonLd />
           {children}
         </NextIntlClientProvider>
+        <Analytics/>
       </body>
     </html>
   );
