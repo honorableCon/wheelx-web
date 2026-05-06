@@ -55,9 +55,12 @@ type InsuranceRequest = {
 
 const STATUS_COLORS: Record<string, string> = {
     pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
-    processing: "bg-blue-100 text-blue-800 border-blue-200",
+    pending_payment: "bg-orange-100 text-orange-800 border-orange-200",
+    processing: "bg-blue-100 text-blue-800 border-blue-200", // Issuance In Progress
     approved: "bg-green-100 text-green-800 border-green-200",
     rejected: "bg-red-100 text-red-800 border-red-200",
+    payment_failed: "bg-red-100 text-red-800 border-red-200",
+    issuance_failed: "bg-red-600 text-white border-red-700", // Alert critique
     active: "bg-emerald-100 text-emerald-800 border-emerald-200",
 };
 
@@ -285,8 +288,8 @@ export default function InsuranceRequestsPage() {
                                         </TableCell>
                                         <TableCell>{request.requestData?.duration} months</TableCell>
                                         <TableCell>
-                                            <Badge className={STATUS_COLORS[request.status] || ""}>
-                                                {request.status}
+                                            <Badge className={STATUS_COLORS[request.status] || "bg-gray-100 text-gray-800"}>
+                                                {request.status.replace('_', ' ')}
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="text-sm text-slate-500">
